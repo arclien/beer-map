@@ -1,0 +1,157 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:vue/recommended"
+  ],
+  "ignorePatterns": ["public/**/*"],
+  "parser": "vue-eslint-parser",
+  "plugins": ["import", "vue"],
+  "rules": {
+    "array-bracket-newline": ["error"],
+    "array-bracket-spacing": ["error"],
+    "array-element-newline": ["error", "consistent"],
+    "arrow-spacing": ["error"],
+    "brace-style": ["error"],
+    "comma-dangle": ["error", "always-multiline"],
+    "comma-spacing": ["error"],
+    "func-call-spacing": ["error"],
+    "function-call-argument-newline": ["error", "consistent"],
+    "function-paren-newline": ["error", "consistent"],
+    "import/order": [
+      "error",
+      {
+        "alphabetize": { "order": "asc" },
+        "groups": [
+          ["builtin", "external"],
+          ["index", "internal", "parent", "sibling", "unknown"],
+          "object"
+        ]
+      }
+    ],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "key-spacing": ["error"],
+    "keyword-spacing": ["error"],
+    "linebreak-style": ["error", "unix"],
+    "no-multiple-empty-lines": [
+      "error",
+      { "max": 1, "maxEOF": 0, "maxBOF": 0 }
+    ],
+    "no-multi-spaces": ["error"],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
+    "no-trailing-spaces": ["error"],
+    "no-var": ["error"],
+    "no-whitespace-before-property": ["error"],
+    "object-curly-spacing": ["error", "always"],
+    "object-curly-newline": [
+      "error",
+      { "consistent": true, "multiline": true }
+    ],
+    "object-property-newline": [
+      "error",
+      { "allowAllPropertiesOnSameLine": true }
+    ],
+    "prefer-const": ["error"],
+    "quote-props": ["error", "as-needed"],
+    "quotes": ["error", "single"],
+    "require-await": ["error"],
+    "semi": ["error"],
+    "semi-spacing": ["error"],
+    "semi-style": ["error"],
+    "space-before-blocks": ["error"],
+    "space-before-function-paren": [
+      "error",
+      { "anonymous": "always", "named": "never" }
+    ],
+    "space-in-parens": ["error"],
+    "space-infix-ops": ["error"],
+    "space-unary-ops": ["error"],
+    "vue/array-bracket-spacing": ["error"],
+    "vue/arrow-spacing": ["error"],
+    "vue/html-closing-bracket-newline": [
+      "error",
+      {
+        "singleline": "never",
+        "multiline": "never"
+      }
+    ],
+    "vue/comma-dangle": ["error", "always-multiline"],
+    "vue/comma-spacing": ["error"],
+    "vue/func-call-spacing": ["error"],
+    "vue/html-self-closing": [
+      "error",
+      {
+        "html": { "normal": "never" }
+      }
+    ],
+    "vue/key-spacing": ["error"],
+    "vue/keyword-spacing": ["error"],
+    "vue/max-attributes-per-line": ["off"],
+    "vue/no-v-html": ["off"],
+    "vue/object-curly-spacing": ["error", "always"],
+    "vue/order-in-components": [
+      "warn",
+      {
+        "order": [
+          "el",
+          "name",
+          "key",
+          "parent",
+          "functional",
+          ["delimiters", "comments"],
+          ["components", "directives", "filters"],
+          "extends",
+          "mixins",
+          ["provide", "inject"],
+          "ROUTER_GUARDS",
+          "layout",
+          "middleware",
+          "validate",
+          "scrollToTop",
+          "transition",
+          "loading",
+          "inheritAttrs",
+          "model",
+          ["props", "propsData"],
+          "emits",
+          "metaInfo",
+          "validations",
+          "setup",
+          "asyncData",
+          "data",
+          "fetch",
+          "head",
+          "computed",
+          "watch",
+          "watchQuery",
+          "LIFECYCLE_HOOKS",
+          "methods",
+          ["template", "render"],
+          "renderError"
+        ]
+      }
+    ],
+    "vue/space-infix-ops": ["error"],
+    "vue/space-unary-ops": ["error"]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "extensions": [".js", ".json", ".jsx", ".vue"],
+        "map": [["@", "./src"]]
+      }
+    }
+  }
+}
