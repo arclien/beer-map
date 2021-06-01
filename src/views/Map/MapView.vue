@@ -14,21 +14,33 @@ import {
   MapSize,
 } from '@/constants/kakaoMap';
 
+import MapData from '@/constants/mapData';
+import { hasCheckedInById } from '@/utils/CheckedIn.utils';
+import getInfoWindow from '@/utils/InfoWindow';
+import { getMarkerImages } from '@/utils/Map.utils';
+
+let selectedMarker = null;
+
 export default {
   data() {
     return {
       kakaoMap: null,
       myGeoLocation: {},
+      markerData: [],
+      markers: [],
+      currentPlaceInfo: {},
+      isVisiblePlaceInfo: false,
     };
   },
   watch: {
     kakaoMap: function () {
-      console.log(this.kakaoMap);
+      this.setMarkerOnMap();
     },
   },
 
   created() {
     this.getGeoLocation();
+    this.markerData = MapData;
   },
 
   mounted() {
@@ -107,6 +119,84 @@ export default {
         );
       }
     },
+
+    setMarkerOnMap() {
+      if (this.kakaoMap === null) {
+        return;
+      }
+      if (!window?.kakao || window?.kakao?.maps === null) {
+        return;
+      }
+
+      // clear prev markers
+      this.markers = this.markers.forEach((marker) => marker.setMap(null));
+      // assign new markers
+      this.markers = this.markerData.map((el) => {
+        const { latitude, longitude, daumId } = el;
+
+        const hasCheckedIn = hasCheckedInById(daumId);
+
+        const { normalImage, overImage, clickImage, checkedInImage } =
+          getMarkerImages();
+
+        // 마커를 생성하고 이미지는 기본 마커 이미지를 사용합니다
+        const marker = new window.kakao.maps.Marker({
+          map: this.kakaoMap,
+          position: new window.kakao.maps.LatLng(latitude, longitude),
+          image: hasCheckedIn ? checkedInImage : normalImage,
+        });
+          // 마커에 표시할 인포윈도우를 생성합니다
+        const infowindow = new window.kakao.maps.InfoWindow({
+          content: getInfoWindow(el),
+        });
+
+        // 마커 객체에 마커아이디와 마커의 기본 이미지를 추가합니다
+        marker.normalImage = hasCheckedIn ? checkedInImage : normalImage;
+
+        // 마커에 mouseover 이벤트를 등록합니다
+        window.kakao.maps.event.addListener(marker, 'mouseover', () => {
+        // 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
+        // 마커의 이미지를 오버 이미지로 변경합니다
+          if (!selectedMarker || selectedMarker !== marker) {
+            marker.setImage(overImage);
+          }
+          infowindow.open(this.kakaoMap, marker);
+        });
+
+        // 마커에 mouseout 이벤트를 등록합니다
+        window.kakao.maps.event.addListener(marker, 'mouseout', () => {
+        // 클릭된 마커가 없고, mouseout된 마커가 클릭된 마커가 아니면
+        // 마커의 이미지를 기본 이미지로 변경합니다
+          if (!selectedMarker || selectedMarker !== marker) {
+            marker.setImage(hasCheckedIn ? checkedInImage : normalImage);
+          }
+          infowindow.close();
+        });
+
+        // 마커에 click 이벤트를 등록합니다
+        window.kakao.maps.event.addListener(marker, 'click', () => {
+          this.currentPlaceInfo = el;
+          this.isVisiblePlaceInfo = true;
+          // 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
+          // 마커의 이미지를 클릭 이미지로 변경합니다
+          if (!selectedMarker || selectedMarker !== marker) {
+          // 클릭된 마커 객체가 null이 아니면
+          // 클릭된 마커의 이미지를 기본 이미지로 변경하고
+            !!selectedMarker &&
+            selectedMarker.setImage(selectedMarker.normalImage);
+
+            // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
+            marker.setImage(clickImage);
+          }
+
+          // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
+          selectedMarker = marker;
+        });
+
+        return marker;
+      });
+
+    },
   },
 };
 </script>
@@ -117,44 +207,6 @@ export default {
   min-height: 100vh;
   max-height: 100vw;
   overflow: hidden;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
-
-input[type='text']::-ms-clear {
-  display: none;
-}
-
-input {
-  -webkit-appearance: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-div {
-  box-sizing: border-box;
-}
-
-*:focus {
-  outline: none;
-}
-
-textarea,
-textarea:focus,
-input:focus {
-  box-sizing: border-box;
-  outline: none;
-  font-family: sans-serif;
 }
 
 .Beer-map-pulse {

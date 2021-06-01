@@ -8,19 +8,45 @@
 
 export default {
   name: 'App',
-}
+};
 </script>
 
 <style lang="scss">
-body {
-  padding: 0px;
-  margin: 0px;
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
+
+input[type='text']::-ms-clear {
+  display: none;
+}
+
+input {
+  -webkit-appearance: none;
+}
+
 a {
   text-decoration: none;
-  &.router-link-exact-active {
-    text-decoration: underline;
-    font-weight: bold;
-  }
+}
+
+div {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+textarea,
+textarea:focus,
+input:focus {
+  box-sizing: border-box;
+  outline: none;
+  font-family: sans-serif;
 }
 </style>
