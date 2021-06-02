@@ -1,9 +1,4 @@
 module.exports = {
-  output: {
-    publicPath: process.env.NODE_ENV === 'production'
-      ? '/beer-map/'
-      : '/',
-  },
   module: {
     rules: [
       // ... other rules omitted
