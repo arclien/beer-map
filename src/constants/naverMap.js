@@ -1,1 +1,1 @@
-export const NaverPlaceMobileUrl = `https://m.place.naver.com/restaurant/`;
+export const NaverPlaceMobileUrl = 'https://m.place.naver.com/restaurant/';

@@ -150,7 +150,7 @@
     "import/resolver": {
       "alias": {
         "extensions": [".js", ".json", ".jsx", ".vue"],
-        "map": [["@", "./src"]]
+        "map": [["@", "./src"], ["images", "./src/assets/images"]]
       }
     }
   }

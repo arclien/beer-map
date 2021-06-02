@@ -1,10 +1,24 @@
 <template>
   <div>
     <div id="container" ref="container"></div>
+    <MapOption
+      :map="kakaoMap"
+      :my-geo-location="myGeoLocation"
+      :get-geo-location="getGeoLocation" />
+
+    <template v-if="isVisiblePlaceInfoWindow">
+      <PlaceInfo :current-place-info="currentPlaceInfo" />
+    </template>
+
+    <LoadingSpinner :loading="!kakaoMap" />
   </div>
 </template>
 
 <script>
+import MapOption from './MapOption/MapOption';
+import PlaceInfo from './PlaceInfo/PlaceInfo';
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
+
 import {
   KAKAO_APP_KEY,
   KAKAO_SDK_URI,
@@ -18,10 +32,16 @@ import MapData from '@/constants/mapData';
 import { hasCheckedInById } from '@/utils/CheckedIn.utils';
 import getInfoWindow from '@/utils/InfoWindow';
 import { getMarkerImages } from '@/utils/Map.utils';
+import { isEmptyObject } from '@/utils/utils';
 
 let selectedMarker = null;
 
 export default {
+  components: {
+    MapOption,
+    LoadingSpinner,
+    PlaceInfo,
+  },
   data() {
     return {
       kakaoMap: null,
@@ -29,8 +49,17 @@ export default {
       markerData: [],
       markers: [],
       currentPlaceInfo: {},
+      checkInPlaceId: null,
       isVisiblePlaceInfo: false,
     };
+  },
+  computed: {
+    isVisiblePlaceInfoWindow() {
+      return (
+        (this.isVisiblePlaceInfo || this.checkInPlaceId) &&
+        !isEmptyObject(this.currentPlaceInfo)
+      );
+    },
   },
   watch: {
     kakaoMap: function () {
@@ -104,7 +133,7 @@ export default {
     getGeoLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          (position) => {
+          position => {
             const {
               coords: { latitude, longitude },
             } = position;
@@ -129,15 +158,19 @@ export default {
       }
 
       // clear prev markers
-      this.markers = this.markers.forEach((marker) => marker.setMap(null));
+      this.markers = this.markers.forEach(marker => marker.setMap(null));
       // assign new markers
-      this.markers = this.markerData.map((el) => {
+      this.markers = this.markerData.map(el => {
         const { latitude, longitude, daumId } = el;
 
         const hasCheckedIn = hasCheckedInById(daumId);
 
-        const { normalImage, overImage, clickImage, checkedInImage } =
-          getMarkerImages();
+        const {
+          normalImage,
+          overImage,
+          clickImage,
+          checkedInImage,
+        } = getMarkerImages();
 
         // 마커를 생성하고 이미지는 기본 마커 이미지를 사용합니다
         const marker = new window.kakao.maps.Marker({
@@ -145,7 +178,7 @@ export default {
           position: new window.kakao.maps.LatLng(latitude, longitude),
           image: hasCheckedIn ? checkedInImage : normalImage,
         });
-          // 마커에 표시할 인포윈도우를 생성합니다
+        // 마커에 표시할 인포윈도우를 생성합니다
         const infowindow = new window.kakao.maps.InfoWindow({
           content: getInfoWindow(el),
         });
@@ -155,8 +188,8 @@ export default {
 
         // 마커에 mouseover 이벤트를 등록합니다
         window.kakao.maps.event.addListener(marker, 'mouseover', () => {
-        // 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
-        // 마커의 이미지를 오버 이미지로 변경합니다
+          // 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
+          // 마커의 이미지를 오버 이미지로 변경합니다
           if (!selectedMarker || selectedMarker !== marker) {
             marker.setImage(overImage);
           }
@@ -165,8 +198,8 @@ export default {
 
         // 마커에 mouseout 이벤트를 등록합니다
         window.kakao.maps.event.addListener(marker, 'mouseout', () => {
-        // 클릭된 마커가 없고, mouseout된 마커가 클릭된 마커가 아니면
-        // 마커의 이미지를 기본 이미지로 변경합니다
+          // 클릭된 마커가 없고, mouseout된 마커가 클릭된 마커가 아니면
+          // 마커의 이미지를 기본 이미지로 변경합니다
           if (!selectedMarker || selectedMarker !== marker) {
             marker.setImage(hasCheckedIn ? checkedInImage : normalImage);
           }
@@ -180,10 +213,10 @@ export default {
           // 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
           // 마커의 이미지를 클릭 이미지로 변경합니다
           if (!selectedMarker || selectedMarker !== marker) {
-          // 클릭된 마커 객체가 null이 아니면
-          // 클릭된 마커의 이미지를 기본 이미지로 변경하고
+            // 클릭된 마커 객체가 null이 아니면
+            // 클릭된 마커의 이미지를 기본 이미지로 변경하고
             !!selectedMarker &&
-            selectedMarker.setImage(selectedMarker.normalImage);
+              selectedMarker.setImage(selectedMarker.normalImage);
 
             // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
             marker.setImage(clickImage);
@@ -195,7 +228,6 @@ export default {
 
         return marker;
       });
-
     },
   },
 };
@@ -213,5 +245,4 @@ export default {
   width: 20px;
   height: 20px;
 }
-
 </style>
