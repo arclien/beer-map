@@ -8,7 +8,14 @@
         </div>
       </template>
       <template v-if="hasCheckedIn">
-        <img :class="$style.logo" src="@/assets/images/logo-support-local.png" alt="logo">
+        <div :class="$style.checkedIn">
+          <font-awesome-icon icon="check" />
+        </div>
+      </template>
+      <template v-else>
+        <div :class="$style.checkIn" @click="setCheckedIn">
+          체크인
+        </div>
       </template>
       <div :class="[$style.infoBody, { [$style.isExpanded]: isExpanded }]">
         <div :class="$style.row">
@@ -53,7 +60,7 @@
 
 import PlaceIframeView from '../PlaceIframeView/PlaceIframeView';
 
-import { hasCheckedInById } from '@/utils/CheckedIn.utils';
+import { hasCheckedInById, setCheckedIn } from '@/utils/CheckedIn.utils';
 import { browserOpen } from '@/utils/utils';
 export default {
   components: {
@@ -71,13 +78,11 @@ export default {
       isExpanded: false,
       placeInfo: this.currentPlaceInfo,
       isKakaoMapView: true,
+      hasCheckedIn: false,
     };
   },
+
   computed: {
-    hasCheckedIn() {
-      const { daumId } = this.placeInfo;
-      return hasCheckedInById(daumId);
-    },
     isAbleToChangeMapView() {
       const { daumId, naverId } = this.placeInfo;
       return this.isExpanded && daumId && naverId;
@@ -87,9 +92,14 @@ export default {
     currentPlaceInfo: {
       handler(newData) {
         this.placeInfo = newData;
+        this.hasCheckedIn = hasCheckedInById(this.placeInfo.daumId);
         this.isKakaoMapView = true;
       },
     },
+  },
+  created() {
+    const { daumId } = this.placeInfo;
+    this.hasCheckedIn = hasCheckedInById(daumId);
   },
   mounted() {
     console.log(this.placeInfo);
@@ -104,6 +114,12 @@ export default {
     },
     openUrl(link) {
       browserOpen(link);
+    },
+    setCheckedIn() {
+      if (this.hasCheckedIn) return;
+      const { daumId } = this.placeInfo;
+      setCheckedIn(daumId);
+      this.hasCheckedIn = hasCheckedInById(daumId);
     },
   },
 };
@@ -166,12 +182,34 @@ export default {
   background-color: #e9be1a;
 }
 
-.logo{
-  width: 100px;
-  height: 50px;
+.checkedIn{
+  width: 20px;
+  height: 20px;
   position: absolute;
-  right: -10px;
-  top: -47px;
+  right: 0px;
+  top: -15px;
+  font-size: 30px;
+}
+
+.checkIn{
+  width: 70px;
+  position: absolute;
+  right: -11px;
+  top: -15px;
+  text-align:right;
+  cursor:pointer;
+
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  z-index: 100;
+  line-height: 1.86;
+  text-align:center;
+  letter-spacing: -1.23px;
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 30%) 2px 2px 0px 0px, rgb(135 135 135) 4px 4px 0px 0px inset, rgb(35 35 35) -4px -4px 0px 0px inset;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: rgb(56, 56, 56);
 }
 
 .infoBody{
