@@ -20,18 +20,20 @@
         <font-awesome-icon icon="search-minus" />
       </div>
     </div>
-    <CollecionView :modal-id="modalId" />
+    <template v-if="isModalOpen">
+      <CollectionModalView :close-modal-callback="closeModalCallback" />
+    </template>
   </div>
 </template>
 
 <script>
 
 import MobileFullHeightModalMixin from '@/mixins/MobileFullHeightModal';
-import CollecionView from '@/views/Collection/CollectionView';
+import CollectionModalView from '@/views/Collection/CollectionModalView';
 
 export default {
   components: {
-    CollecionView,
+    CollectionModalView,
   },
   mixins: [MobileFullHeightModalMixin],
   props: {
@@ -47,12 +49,12 @@ export default {
       type: Function,
       default: () => {},
     },
-    modalId: {
-      type: String,
-      default: 'collection',
-    },
   },
-
+  data() {
+    return {
+      isModalOpen: false,
+    };
+  },
   methods: {
     relocateCurrentPosition() {
       this.getGeoLocation();
@@ -67,7 +69,10 @@ export default {
       this.map.setLevel(this.map.getLevel() + 1);
     },
     showCollectionHistory() {
-      this.openModal(this.modalId);
+      this.isModalOpen = true;
+    },
+    closeModalCallback() {
+      this.isModalOpen = false;
     },
   },
 };

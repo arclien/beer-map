@@ -6,7 +6,7 @@
     <div :class="$style.modal">
       <div :class="$style.header">
         <div :class="$style.left">
-          <div :class="$style.icon" @click="closeModal(modalId)">
+          <div :class="$style.icon" @click="closeModalCallback">
             <font-awesome-icon icon="times" />
           </div>
         </div>
@@ -47,6 +47,10 @@ export default {
       default: '',
     },
     onHeaderButtonClick: {
+      type: Function,
+      default: () => {},
+    },
+    closeModalCallback: {
       type: Function,
       default: () => {},
     },
@@ -93,7 +97,7 @@ export default {
       box-sizing: content-box;
       width: 14px;
       height: 14px;
-      padding: 10px 10px 10px 16px;
+      padding: 10px;
       vertical-align: middle;
     }
   }
@@ -123,6 +127,8 @@ export default {
 .body{
   width: 100%;
   height: calc(100% - 48px);
+   box-sizing: border-box;
+   padding:10px;
 
   .content{
     height: 100%;
