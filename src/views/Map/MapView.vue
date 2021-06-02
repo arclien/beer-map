@@ -23,9 +23,9 @@ import {
   KAKAO_APP_KEY,
   KAKAO_SDK_URI,
   DEFAULT_GEO,
-  MapLevel,
   GEO_OPTIONS,
   MapSize,
+  MapLevel,
 } from '@/constants/kakaoMap';
 
 import MapData from '@/constants/mapData';
@@ -63,6 +63,7 @@ export default {
   },
   watch: {
     kakaoMap: function () {
+      this.setMapClickEventListener();
       this.setMarkerOnMap();
     },
   },
@@ -149,6 +150,23 @@ export default {
       }
     },
 
+    // 마커를 제외한 맵 클릭시 초기화
+    setMapClickEventListener() {
+      if (this.kakaoMap === null) {
+        return;
+      }
+
+      window.kakao.maps.event.addListener(this.kakaoMap, 'click', () => {
+        this.currentPlaceInfo = {};
+        this.isVisiblePlaceInfo = false;
+        if (selectedMarker) {
+          selectedMarker.setImage(selectedMarker.normalImage);
+          selectedMarker = null;
+        }
+      });
+    },
+
+    // 맵에 마커 추가
     setMarkerOnMap() {
       if (this.kakaoMap === null) {
         return;
