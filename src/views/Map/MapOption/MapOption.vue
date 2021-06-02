@@ -12,7 +12,7 @@
         <font-awesome-icon icon="search-location" />
       </div>
 
-      <div :class="[$style.icon, $style.history]" @click="() => {}">
+      <div :class="[$style.icon, $style.history]" @click="showCollectionHistory">
         <font-awesome-icon icon="history" />
       </div>
 
@@ -20,11 +20,20 @@
         <font-awesome-icon icon="search-minus" />
       </div>
     </div>
+    <CollecionView :modal-id="modalId" />
   </div>
 </template>
 
 <script>
+
+import MobileFullHeightModalMixin from '@/mixins/MobileFullHeightModal';
+import CollecionView from '@/views/Collection/CollectionView';
+
 export default {
+  components: {
+    CollecionView,
+  },
+  mixins: [MobileFullHeightModalMixin],
   props: {
     map: {
       type: Object,
@@ -37,6 +46,10 @@ export default {
     getGeoLocation: {
       type: Function,
       default: () => {},
+    },
+    modalId: {
+      type: String,
+      default: 'collection',
     },
   },
 
@@ -52,6 +65,9 @@ export default {
     },
     zoomOut() {
       this.map.setLevel(this.map.getLevel() + 1);
+    },
+    showCollectionHistory() {
+      this.openModal(this.modalId);
     },
   },
 };

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import CollectionView from '@/views/Collection/CollectionView.vue';
 import MapView from '@/views/Map/MapView.vue';
 
 Vue.config.productionTip = false;
@@ -15,11 +14,6 @@ export const router = new VueRouter({
     {
       path: '/',
       component: MapView,
-    },
-    {
-      path: '/collection',
-      name: 'collection',
-      component: CollectionView,
     },
   ],
 });
