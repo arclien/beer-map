@@ -130,7 +130,7 @@ export default {
             callback: () => this.closeModal(),
           },
           {
-            title: this.hasCheckedIn ? '확인' : '체크인!',
+            title: this.hasCheckedIn ? '확인' : 'Booze Up!',
             callback: () => {
               this.setCheckedIn();
               this.closeModal();

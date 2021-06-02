@@ -3,8 +3,8 @@ export default {
   methods: {
     openModal({ title, text, handler }) {
       this.$modal.show('dialog', {
-        title: title,
-        text: text,
+        title,
+        text,
         buttons: handler.map(({ title, callback }) => {
           return {
             title,
