@@ -13,7 +13,7 @@
         </div>
       </template>
       <template v-else>
-        <div :class="$style.checkIn" @click="setCheckedIn">
+        <div :class="$style.checkIn" @click="openCheckInModal">
           체크인
         </div>
       </template>
@@ -60,12 +60,15 @@
 
 import PlaceIframeView from '../PlaceIframeView/PlaceIframeView';
 
+import DialogModal from '@/mixins/DialogModal';
 import { hasCheckedInById, setCheckedIn } from '@/utils/CheckedIn.utils';
+import { getTodayDate } from '@/utils/day';
 import { browserOpen } from '@/utils/utils';
 export default {
   components: {
     PlaceIframeView,
   },
+  mixins: [DialogModal],
   props: {
     currentPlaceInfo: {
       type: Object,
@@ -114,6 +117,27 @@ export default {
     },
     openUrl(link) {
       browserOpen(link);
+    },
+    openCheckInModal() {
+      const { name } = this.placeInfo;
+
+      this.openModal({
+        title: `${name}`,
+        text: this.hasCheckedIn ? '이미 체크인 하셨습니다.' : `${getTodayDate()}에 체크인 하시겠습니까?`,
+        handler: [
+          {
+            title: '취소',
+            callback: () => this.closeModal(),
+          },
+          {
+            title: this.hasCheckedIn ? '확인' : '체크인!',
+            callback: () => {
+              this.setCheckedIn();
+              this.closeModal();
+            },
+          },
+        ],
+      });
     },
     setCheckedIn() {
       if (this.hasCheckedIn) return;
