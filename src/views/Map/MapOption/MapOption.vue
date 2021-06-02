@@ -8,6 +8,13 @@
       <div :class="[$style.icon, $style.relocate]" @click="relocateCurrentPosition">
         <font-awesome-icon icon="location-arrow" />
       </div>
+      <div :class="[$style.icon, $style.searchLocation]" @click="() => {}">
+        <font-awesome-icon icon="search-location" />
+      </div>
+
+      <div :class="[$style.icon, $style.history]" @click="() => {}">
+        <font-awesome-icon icon="history" />
+      </div>
 
       <div :class="[$style.icon, $style.zoomOut]" @click="zoomOut">
         <font-awesome-icon icon="search-minus" />
@@ -86,7 +93,7 @@ export default {
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
   }
-  &.relocate{
+  &.relocate, &.history, &.searchLocation{
     border-top: solid 2px #000000;
     border-bottom: solid 2px #000000;
   }
