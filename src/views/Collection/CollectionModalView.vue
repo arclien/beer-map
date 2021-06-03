@@ -8,8 +8,13 @@
       <template #body>
         <div>
           <ul>
-            <li v-for="item in checkInList" :key="item">
-              {{ item }}
+            <li v-for="item in checkInList" :key="item.id" :class="$style.item" @click="$parent.$emit('show-place-info-window', item.id)">
+              <div :class="$style.name">
+                {{ getMapDataById(item.id).name }}
+              </div>
+              <div :class="$style.date">
+                {{ item.date.length }}회 방문. {{ item.date.join(", ") }}
+              </div>
             </li>
           </ul>
         </div>
@@ -23,6 +28,7 @@
 import MobileFullHeightModal from '@/components/Modal/MobileFullHeightModal';
 import MobileFullHeightModalMixin from '@/mixins/MobileFullHeightModal';
 import { getCheckedInData } from '@/utils/CheckedIn.utils';
+import { getMapDataById } from '@/utils/MapData.utils';
 
 export default {
   components: {
@@ -42,8 +48,7 @@ export default {
     };
   },
   created() {
-    this.checkInList = getCheckedInData();
-
+    this.checkInList = getCheckedInData().sort((a, b) => b.date.length - a.date.length);
   },
   mounted() {
     this.openModal(this.modalId);
@@ -51,10 +56,25 @@ export default {
   beforeUnmount() {
     this.closeModal(this.modalId);
   },
+  methods: {
+    getMapDataById(id) {
+      return getMapDataById(id);
+    },
+  },
 
 };
 </script>
 
-<style>
-
+<style lang="scss" module>
+.item{
+  padding: 10px;
+  border-bottom:1px solid #ddd;
+}
+.name{
+  font-size: 16px;
+}
+.date{
+  font-size: 12px;
+  color: #aaa;
+}
 </style>

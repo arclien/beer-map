@@ -4,7 +4,8 @@
     <MapOption
       :map="kakaoMap"
       :my-geo-location="myGeoLocation"
-      :get-geo-location="getGeoLocation" />
+      :get-geo-location="getGeoLocation"
+      @show-place-info-window="showPlaceInfoWindow" />
 
     <template v-if="isVisiblePlaceInfoWindow">
       <PlaceInfo :current-place-info="currentPlaceInfo" />
@@ -32,6 +33,7 @@ import MapData from '@/constants/mapData';
 import { hasCheckedInById } from '@/utils/CheckedIn.utils';
 import getInfoWindow from '@/utils/InfoWindow';
 import { getMarkerImages } from '@/utils/Map.utils';
+import { getMapDataById } from '@/utils/MapData.utils';
 import { isEmptyObject } from '@/utils/utils';
 
 let selectedMarker = null;
@@ -250,6 +252,11 @@ export default {
 
         return marker;
       });
+    },
+
+    showPlaceInfoWindow(id) {
+      this.currentPlaceInfo = getMapDataById(id);
+      this.isVisiblePlaceInfo = true;
     },
   },
 };

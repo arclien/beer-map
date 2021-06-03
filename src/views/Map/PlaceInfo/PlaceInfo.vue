@@ -8,7 +8,7 @@
         </div>
       </template>
       <template v-if="hasCheckedIn">
-        <div :class="$style.checkedIn">
+        <div :class="$style.checkedIn" @click="openCheckInModal">
           <font-awesome-icon icon="check" />
         </div>
       </template>
@@ -105,7 +105,7 @@ export default {
     this.hasCheckedIn = hasCheckedInById(daumId);
   },
   mounted() {
-    console.log(this.placeInfo);
+    // console.log(this.placeInfo);
   },
 
   methods: {
@@ -140,9 +140,11 @@ export default {
       });
     },
     setCheckedIn() {
-      if (this.hasCheckedIn) return;
       const { daumId } = this.placeInfo;
-      setCheckedIn(daumId);
+      setCheckedIn({
+        id: daumId,
+        date: getTodayDate(),
+      });
       this.hasCheckedIn = hasCheckedInById(daumId);
     },
   },
@@ -207,12 +209,13 @@ export default {
 }
 
 .checkedIn{
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   position: absolute;
   right: 0px;
   top: -15px;
   font-size: 30px;
+  z-index: 1;
 }
 
 .checkIn{

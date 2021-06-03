@@ -50,4 +50,13 @@ input:focus {
   outline: none;
   font-family: sans-serif;
 }
+
+ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+li {
+  list-style: none;
+}
 </style>

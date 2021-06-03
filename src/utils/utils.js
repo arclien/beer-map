@@ -54,3 +54,7 @@ export const browserOpen = (
 ) => {
   window.open(address, target, features);
 };
+
+export const getObjectById = (id, obj) => {
+  return obj.find((el) => el.id === id) || null;
+};
