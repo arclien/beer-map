@@ -12,7 +12,7 @@
             <collection-list @show-place-info-window="showPlaceInfoWindow" />
           </template>
           <template v-else-if="viewType === VIEW_TYPE.COLLECTION">
-            <collection-grid />
+            <collection-grid @show-place-info-window="showPlaceInfoWindow" />
           </template>
         </div>
       </template>

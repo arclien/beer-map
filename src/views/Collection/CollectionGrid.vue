@@ -1,10 +1,9 @@
 <template>
   <div :class="$style.container">
-    <div v-for="item in MapData" :key="item.daumId" :class="[$style.item, { [$style.checkedIn]: hasCheckedIn(item.daumId) }]">
+    <div v-for="item in MapData" :key="item.daumId"
+         :class="[$style.item, { [$style.checkedIn]: hasCheckedIn(item.daumId) }]"
+         @click="$emit('show-place-info-window', item.daumId)">
       <span>{{ item.name }}</span>
-      <div v-if="hasCheckedIn(item.daumId)" :class="$style.checkInStamp">
-        <font-awesome-icon icon="check-circle" />
-      </div>
     </div>
   </div>
 </template>
@@ -43,7 +42,7 @@ export default {
   flex-wrap: wrap;
 }
 .item{
-  width:50%;
+  width:33%;
   padding:10px;
   box-sizing: border-box;
   display: flex;
@@ -56,19 +55,10 @@ export default {
   background-color: #f5f5f5;
   position: relative;
   opacity: 0.3;
+  text-align: center;
 
   &.checkedIn{
     opacity: 1;
-  }
-  .checkInStamp{
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    font-size: 50px;
-    transform: rotate(-20deg);
-    color: red;
   }
 }
 </style>
