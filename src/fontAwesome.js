@@ -9,6 +9,8 @@ import {
   faCheck,
   faHistory,
   faTimes,
+  faExchangeAlt,
+  faCheckCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vue from 'vue';
@@ -23,6 +25,8 @@ library.add(
   faCheck,
   faHistory,
   faTimes,
+  faExchangeAlt,
+  faCheckCircle,
 );
 
 // fontawesome아이콘을 Vue탬플릿에 사용할 수 있게 등록해 줍니다.

@@ -105,6 +105,12 @@ export default {
     width: 90px;
     max-width: 90px;
     text-align: right;
+    .button{
+      color:#fff;
+      box-sizing: content-box;
+      padding: 5px 10px;
+      vertical-align: middle;
+    }
   }
 
   .title{
