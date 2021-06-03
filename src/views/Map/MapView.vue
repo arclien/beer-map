@@ -66,6 +66,9 @@ export default {
       this.setMapClickEventListener();
       this.setMarkerOnMap();
     },
+    myGeoLocation: function () {
+      this.initMap();
+    },
   },
 
   created() {
@@ -74,12 +77,13 @@ export default {
   },
 
   mounted() {
-    window.kakao && window.kakao.maps
-      ? this.initMap()
-      : this.addKakaoMapScript();
+    this.addKakaoMapScript();
   },
+
   methods: {
     initMap() {
+      if (!window.kakao || !window.kakao.maps) return;
+
       const { lat, lng } = this.myGeoLocation;
       if (!lat || !lng) return;
       // 지도를 생성할 때 필요한 기본 옵션
