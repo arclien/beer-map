@@ -32,11 +32,9 @@
   </modal>
 </template>
 <script>
-import MobileFullHeightModalMixin from '@/mixins/MobileFullHeightModal';
 
 export default {
   name: 'MobileFullHeightModal',
-  mixins: [MobileFullHeightModalMixin],
   props: {
     title: {
       type: String,

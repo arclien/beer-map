@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.container">
     <div v-for="item in MapData" :key="item.daumId"
-         :class="[$style.item, { [$style.checkedIn]: hasCheckedIn(item.daumId) }]"
+         :class="[$style.item, { [$style.checkedIn]: hasCheckedInById(item.daumId) }]"
          @click="$emit('show-place-info-window', item.daumId)">
       <span>{{ item.name }}</span>
     </div>
@@ -9,31 +9,18 @@
 </template>
 
 <script>
+import { defineComponent } from '@vue/composition-api';
 import MapData from '@/constants/mapData';
-import { getCheckedInData, hasCheckedInById } from '@/utils/CheckedIn.utils';
-import { getMapDataById } from '@/utils/MapData.utils';
+import { hasCheckedInById } from '@/utils/CheckedIn.utils';
 
-export default {
-
-  data() {
+export default defineComponent({
+  setup() {
     return {
-      checkInList: [],
-      MapData: MapData,
+      MapData,
+      hasCheckedInById,
     };
   },
-  computed: { },
-  created() {
-    this.checkInList = getCheckedInData();
-  },
-  methods: {
-    getMapDataById(id) {
-      return getMapDataById(id);
-    },
-    hasCheckedIn(id) {
-      return hasCheckedInById(id);
-    },
-  },
-};
+});
 </script>
 
 <style lang="scss" module>

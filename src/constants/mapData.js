@@ -6,6 +6,7 @@ const MapData = [
     name: '두탭스 | Dotaps',
     locLink: 'http://instagram.com/dotapscraft',
     daumId: 1676142051,
+    naverId: 464610475,
   },
   {
     address: '제주특별자치도 제주시 한림읍 한림로 345',
@@ -14,6 +15,7 @@ const MapData = [
     name: '기영상회',
     locLink: 'https://www.instagram.com/josiesbottleshop/',
     daumId: 15710059,
+    naverId: 30991666,
   },
   {
     address: '강원 강릉시 경강로 2668 1층',
@@ -22,6 +24,7 @@ const MapData = [
     name: '요술부엌 | Magic Kitchen',
     locLink: 'https://www.instagram.com/magicshop2668',
     daumId: 73254374,
+    naverId: 1814420531,
   },
   {
     address: '서울특별시 마포구 토정로3안길 10',
@@ -30,6 +33,7 @@ const MapData = [
     name: '서울 브루어리 | seoul brewery ',
     locLink: 'https://www.instagram.com/seoulbrewery',
     daumId: 155352211,
+    naverId: 1740988081,
   },
   {
     address: '서울 종로구 자하문로2길 20',
@@ -38,6 +42,7 @@ const MapData = [
     name: '보리마루 탭하우스 | Borimaru  Taphouse',
     locLink: 'https://www.instagram.com/borimaru_pub/',
     daumId: 2054442230,
+    naverId: 38667685,
   },
   {
     address: '서울특별시 종로구 사직동 사직로10길 5',
@@ -46,6 +51,7 @@ const MapData = [
     name: '몰림 | Mollim',
     locLink: 'https://www.instagram.com/mollim_gypsybrewery',
     daumId: 1757126995,
+    naverId: 1061240251,
   },
   {
     address: '경남 통영시 해송정4길 37 미륵미륵빌딩 ',
@@ -54,6 +60,7 @@ const MapData = [
     name: '미륵미륵 | mireukmireuk',
     locLink: 'https://www.instagram.com/mireukmireuk',
     daumId: 397100106,
+    naverId: 1827186656,
   },
   {
     address: '서울특별시 서초구 반포동 739-35',
@@ -62,6 +69,7 @@ const MapData = [
     name: '플레이볼 | Sports Pub PLAYBALL',
     locLink: 'https://www.instagram.com/sportspub_playball/',
     daumId: 16794038,
+    naverId: 37028314,
   },
   {
     address: '경기 성남시 분당구 운중로267번길 7-9 1층',
@@ -70,6 +78,7 @@ const MapData = [
     name: '후안즈 | JUANS',
     locLink: 'https://instagram.com/juan.augustinus',
     daumId: 187410031,
+    naverId: 1187221669,
   },
   {
     address: '경북 안동시 문화광장길 16-7 1층',
@@ -78,6 +87,7 @@ const MapData = [
     name: '안동맥주퍼블릭하우스',
     locLink: 'https://instagram.com/andongbeer.pub?igshid=162yys95dv74d',
     daumId: 1363993226,
+    naverId: 1150887058,
   },
   {
     address: '서울 종로구 삼일대로32길 41',
@@ -86,6 +96,7 @@ const MapData = [
     name: '숙녀미용실 카페앤펍',
     locLink: 'https://www.instagram.com/sooknyo_salon',
     daumId: 485843115,
+    naverId: 836512894,
   },
   {
     address: '대구 달서구 월배로40길 85 103호',
@@ -94,6 +105,7 @@ const MapData = [
     name: '엠버스 펍 | Ambers Pub',
     locLink: 'https://www.instagram.com/amberspub/',
     daumId: 549011441,
+    naverId: 1547405526,
   },
   {
     address: '부산광역시 해운대구 송정중앙로5번길 106-1',
@@ -102,6 +114,7 @@ const MapData = [
     name: '와일드웨이브',
     locLink: 'https://www.instagram.com/wildwave.brew',
     daumId: 260049938,
+    naverId: 37642698,
   },
   {
     address: '전남 순천시 영동길 48 1층',
@@ -110,6 +123,7 @@ const MapData = [
     name: '순천브루어리',
     locLink: 'https://www.instagram.com/Suncheon_beer',
     daumId: 1923290434,
+    naverId: 1729596125,
   },
   {
     address: '경남 진주시 진주대로910',
@@ -118,6 +132,7 @@ const MapData = [
     name: '진주 바틀샵 | Jinju Bottle Shop',
     locLink: 'https://www.instagram.com/jinju_bottleshop/',
     daumId: 1411985811,
+    naverId: 1504863575,
   },
   {
     address: '서울 송파구 법원로11길 11 B동 144호',
@@ -126,6 +141,7 @@ const MapData = [
     name: '효모사피엔스 비어샵 | hyomosapiens',
     locLink: 'https://www.instagram.com/hyomosapiens_official/',
     daumId: 475098468,
+    naverId: 1003859128,
   },
   {
     address: '서울시 강남구 삼성동 44-16',
@@ -143,6 +159,7 @@ const MapData = [
     name: '서프파이어 | SURF FIRE',
     locLink: 'https://www.instagram.com/surf_fire/',
     daumId: 331093434,
+    naverId: 1002132187,
   },
   {
     address: '서울 영등포구 여의대방로68길 15 영창빌딩',
@@ -151,6 +168,7 @@ const MapData = [
     name: '여의도 케그샵 | KEG SHOP',
     locLink: 'https://www.instagram.com/kegshop_official/',
     daumId: 167948055,
+    naverId: 1647968724,
   },
   {
     address: '서울 서대문구 연세로12길 27',
@@ -159,6 +177,7 @@ const MapData = [
     name: '뉴타운 신촌 | New Town Shinchon',
     locLink: 'https://www.instagram.com/newtownbehere/',
     daumId: 1702788673,
+    naverId: 481514820,
   },
   {
     address: '제주 제주시 광양13길 6-2',
@@ -167,6 +186,7 @@ const MapData = [
     name: '달맥(제주) | Moon Beer',
     locLink: 'https://www.instagram.com/moonbeer_jeju',
     daumId: 436462813,
+    naverId: 1098048149,
   },
   {
     address: '인천광역시 남구 소성로 208 2층',
@@ -175,6 +195,7 @@ const MapData = [
     name: '시민맥주',
     locLink: 'www.instagram.com/citizenbrewing_community',
     daumId: 372510294,
+    naverId: 699628949,
   },
   {
     address: '경기 성남시 분당구 정자일로 146 엠코해리츠 101동 103호',
@@ -183,14 +204,16 @@ const MapData = [
     name: '야몽야몽 크래프트 비어펍 | YamongYamong Craft Beer Pub',
     locLink: 'https://www.instagram.com/yamongyamong/',
     daumId: 1589818732,
+    naverId: 38005907,
   },
   {
     address: '경상남도 진주시 가좌길 18-1 ',
     latitude: 35.156466,
     longitude: 128.105602,
-    name: '사운드가든 ',
+    name: '사운드가든',
     locLink: 'https://www.instagram.com/soundgardenbar',
     daumId: 12045730,
+    naverId: 11831483,
   },
   {
     address: '경기 화성시 동탄대로 181 지하 3층 CB334호',
@@ -199,6 +222,7 @@ const MapData = [
     name: '버드나무 크래프트 | Budnamu Craft',
     locLink: 'https://www.instagram.com/budnamu_craft',
     daumId: 825870427,
+    naverId: 1597591694,
   },
   {
     address: '대전광역시 서구 1119 메르하우젠 108호',
@@ -207,6 +231,7 @@ const MapData = [
     name: '크래프트피피 | CRAFT PEEPEE',
     locLink: 'https://www.instagram.com/craft_peepee',
     daumId: 26519302,
+    naverId: 36314859,
   },
   {
     address: '경상남도 남해군 삼동면 물건리 233-1',
@@ -215,6 +240,7 @@ const MapData = [
     name: '완벽한인생 브루펍',
     locLink: 'https://www.instagram.com/perfectlife.official/',
     daumId: 1636668458,
+    naverId: 1748738946,
   },
   {
     address: '서울시 마포구 서교동 347-30',
@@ -223,6 +249,7 @@ const MapData = [
     name: '누바 | NUBA',
     locLink: 'https://www.instagram.com/nuba_seoul/',
     daumId: 16051354,
+    naverId: 21074787,
   },
   {
     address: '경기 성남시 수정구 위례순환로4길 15 1층',
@@ -231,6 +258,7 @@ const MapData = [
     name: '크래프트인하우스',
     locLink: 'https://www.instagram.com/craftinhouse2019wiryejung',
     daumId: 872322591,
+    naverId: 1550813605,
   },
   {
     address: '서울 성동구 서울숲길 55',
@@ -239,6 +267,7 @@ const MapData = [
     name: '브루 5150 (바틀5150)| Brew 5150(Bottle5150)',
     locLink: 'https://www.instagram.com/brew5150/',
     daumId: 2083149859,
+    naverId: 1164434838,
   },
   {
     address: '서울시 중구 신당동 131-23',
@@ -247,6 +276,7 @@ const MapData = [
     name: '헤이웨이브 | Hey Wave',
     locLink: 'https://www.instagram.com/heywave_sindang/',
     daumId: 1786239008,
+    naverId: 1461483258,
   },
   {
     address: '서울 영등포구 도림로 431',
@@ -255,6 +285,7 @@ const MapData = [
     name: '조르바 더크래프트 | zorba the craft',
     locLink: 'https://www.instagram.com/zorbathecraft/',
     daumId: 2081236643,
+    naverId: 1128418151,
   },
   {
     address: '강원도 강릉시 홍제동 93-8',
@@ -263,6 +294,7 @@ const MapData = [
     name: '버드나무브루어리 | Budnamu Brewery',
     locLink: ' https://www.instagram.com/budnamu_brewery',
     daumId: 27152913,
+    naverId: 37090227,
   },
   {
     address: '부산 중구 남포길 31',
@@ -271,6 +303,7 @@ const MapData = [
     name: '아키투탭하우스',
     locLink: 'https://www.instagram.com/akitu_tap_house/',
     daumId: 27367334,
+    naverId: 36830897,
   },
   {
     address: '서울 동대문구 천장산로7길 8 ',
@@ -279,6 +312,7 @@ const MapData = [
     name: '미바드래프트 | Mibasdraught',
     locLink: 'https://www.instagram.com/mibasdraught',
     daumId: 1793615834,
+    naverId: 1737929336,
   },
   {
     address: '서울 마포구 와우산로5길 17-1 1층',
@@ -287,6 +321,7 @@ const MapData = [
     name: '에디네맥주공방',
     locLink: 'https://www.instagram.com/Eddies_Brewingroom',
     daumId: 1241028181,
+    naverId: 1725804859,
   },
   {
     address: '서울 중구 을지로12길 28',
@@ -295,6 +330,7 @@ const MapData = [
     name: '을지로 차이 | Euljiro_Cha.E',
     locLink: 'https://www.instagram.com/Euljiro_Cha.E',
     daumId: 685618522,
+    naverId: 1032907274,
   },
   {
     address: '서울특별시 강서구 화곡동 1076-9',
@@ -303,6 +339,7 @@ const MapData = [
     name: '당근슈퍼 | Carrot Mart',
     locLink: 'http://www.instagram.com/carrot__mart',
     daumId: 1842153155,
+    naverId: 1061829309,
   },
   {
     address: '서울시 용산구 용산동2가 26-10',
@@ -311,6 +348,7 @@ const MapData = [
     name: '히타나 | gitana',
     locLink: 'https://www.instagram.com/gitana_hbc',
     daumId: 894757902,
+    naverId: 1547546558,
   },
   {
     address: '울산 동구 번덕8길 32 1층',
@@ -319,6 +357,7 @@ const MapData = [
     name: '찬이집',
     locLink: 'https://www.instagram.com/chan___house',
     daumId: 1300287135,
+    naverId: 1464911050,
   },
   {
     address: '인천 연수구 컨벤시아대로 116',
@@ -327,6 +366,7 @@ const MapData = [
     name: '칼리가리 박사의 밀실 송도점 | caligari songdo',
     locLink: 'https://www.instagram.com/caligari_milsil_official',
     daumId: 1401776714,
+    naverId: 37944148,
   },
   {
     address: '서울 강남구 삼성로69길 11',
@@ -335,6 +375,7 @@ const MapData = [
     name: '더 펍 사운드온 대치 |  The pub sound on (daechi)',
     locLink: 'https://www.instagram.com/soundon_daechi',
     daumId: 1714242207,
+    naverId: 1068917256,
   },
   {
     address: '부산 금정구 장전온천천로 51',
@@ -343,6 +384,7 @@ const MapData = [
     name: '세미스피어 | semisphere',
     locLink: 'https://www.instagram.com/semisphere_bottleshop',
     daumId: 213525141,
+    naverId: 1118453140,
   },
   {
     address: '서울시 용산구 신흥로20길 39',
@@ -351,6 +393,7 @@ const MapData = [
     name: '브루어스 | Brewers',
     locLink: 'www.instagram.com/brewers_craftbeer',
     daumId: 444745978,
+    naverId: 1605869377,
   },
   {
     address: '인천광역시 부평구 부평5동 154-25 2층',
@@ -359,6 +402,7 @@ const MapData = [
     name: '브로이인탭하우스 | BRAU IN Tap house',
     locLink: 'www.instagram.com/brauintap',
     daumId: 24324246,
+    naverId: 34698935,
   },
   {
     address: '경주시 원효로 152-2 1층',
@@ -367,6 +411,7 @@ const MapData = [
     name: '위켄드커먼 | weekend common',
     locLink: 'https://www.instagram.com/weekendcommon',
     daumId: 829951666,
+    naverId: 1198919155,
   },
   {
     address: '서울시 서초구 신반포로15길 29 신반포상가 1층',
@@ -375,6 +420,7 @@ const MapData = [
     name: '케그샵 반포 한강점',
     locLink: 'https://www.instagram.com/kegshop_banpo/',
     daumId: 2090152440,
+    naverId: 1980961686,
   },
   {
     address: '대전 서구 둔지로 52',
@@ -383,6 +429,7 @@ const MapData = [
     name: '에잇마일 | 8 mile',
     locLink: 'https://www.instagram.com/8mile_pizza',
     daumId: 1169976254,
+    naverId: 1307411678,
   },
   {
     address: '경기 용인시 처인구 포곡읍 곡현로133번길 21',
@@ -391,14 +438,16 @@ const MapData = [
     name: '노브133 | nov 133',
     locLink: 'https://www.instagram.com/nov_133_',
     daumId: 101988354,
+    naverId: 1656610815,
   },
   {
     address: '서울 송파구 위례광장로 120 (위례중앙푸르지오1단지 140호) ',
     latitude: 37.475015,
     longitude: 127.14163,
-    name: 'M83 ',
+    name: 'M83',
     locLink: 'https://www.instagram.com/to.m83',
     daumId: 642295686,
+    naverId: 1327458645,
   },
   {
     address: '경기 용인시 처인구 백령로 39 ',
@@ -407,6 +456,7 @@ const MapData = [
     name: '매직트리브루어리 브루펍',
     locLink: 'https://instagram.com/magictree_yongin',
     daumId: 1023321265,
+    naverId: 1339365964,
   },
   {
     address: '제주도 서귀포시 중앙로48번길10',
@@ -415,6 +465,7 @@ const MapData = [
     name: '제주약수터 (올레시장 점) | JEJU FOUNTAIN OLLE MARKET',
     locLink: 'https://www.instagram.com/jeju_beer_fountain/',
     daumId: 1819831036,
+    naverId: 1777244767,
   },
   {
     address: '경기 수원시 팔달구 신풍로23번길 28 1층',
@@ -423,6 +474,7 @@ const MapData = [
     name: '엘리펀트 캐슬 | ELEPHANT CASTLE',
     locLink: 'https://www.instagram.com/elephantcastle2018/',
     daumId: 1611743604,
+    naverId: 1352303121,
   },
   {
     address: '경기 가평군 상면 청군로 429',
@@ -431,6 +483,7 @@ const MapData = [
     name: '크래머리 가평 브루 펍 | Kraemerlee Gapyeong Brew Pub',
     locLink: 'https://www.instagram.com/kraemerlee/',
     daumId: 1338085411,
+    naverId: 1829721672,
   },
   {
     address: '서울 중구 수표로 48-16',
@@ -439,6 +492,7 @@ const MapData = [
     name: '을지맥옥 | euljirobrewing',
     locLink: 'https://www.instagram.com/euljirobrewing',
     daumId: 2091976811,
+    naverId: 1172310688,
   },
   {
     address: '서울시 성북구 성북로14길 10',
@@ -447,6 +501,7 @@ const MapData = [
     name: '성북동 바틀샵 | Seongbukdong Bottle Shop',
     locLink: 'https://www.instagram.com/sb_bottleshop/',
     daumId: 663385998,
+    naverId: 1420518960,
   },
   {
     address: '서울시 종로구 소격동 158-4 ',
@@ -455,6 +510,7 @@ const MapData = [
     name: '기와탭룸 | kiwataproom',
     locLink: 'http://instagram.com/kiwataproom',
     daumId: 27117874,
+    naverId: 37127034,
   },
   {
     address: '서울 서대문구 연희맛로 17-18',
@@ -463,6 +519,7 @@ const MapData = [
     name: '묘한술책 | alcoholbook',
     locLink: 'https://www.instagram.com/alcoholbook',
     daumId: 15422300,
+    naverId: 20502569,
   },
   {
     address: '서울 서초구 강남대로 224 지하 1층 A25호',
@@ -471,6 +528,7 @@ const MapData = [
     name: '알프리',
     locLink: 'https://www.instagram.com/alfri_3.17',
     daumId: 800100792,
+    naverId: 1314792768,
   },
   {
     address: '서울특별시 마포구 상수동 323-2 2층',
@@ -479,6 +537,7 @@ const MapData = [
     name: '웨일펍 수제맥주 | Whale pub beer',
     locLink: 'https://www.instagram.com/whalepub',
     daumId: 26965496,
+    naverId: 35756687,
   },
   {
     address: '경기 용인시 처인구 포곡읍 포곡로61번길 6',
@@ -487,6 +546,7 @@ const MapData = [
     name: '후 펍 | Hoo Pub',
     locLink: 'https://www.instagram.com/hoo_pub/',
     daumId: 1337304384,
+    naverId: 1299564957,
   },
   {
     address: '서울시 중구 을지로 157 3층 외부 다열 376호',
@@ -495,6 +555,7 @@ const MapData = [
     name: '끽비어 컴퍼니(탭룸) | ggeek beer co.',
     locLink: 'http://instagram.com/ggeek_beer',
     daumId: 1393694123,
+    naverId: 1987256089,
   },
   {
     address: '서울시 마포구 월드컵북로 9길 24 AWT 지층',
@@ -503,6 +564,7 @@ const MapData = [
     name: '더풀비어 | The Fool Beer',
     locLink: 'https://www.instagram.com/the_fool_beer',
     daumId: 685677376,
+    naverId: 1940562529,
   },
   {
     address: '경기 시흥시 서울대학로278번길 25-18 101호',
@@ -511,6 +573,7 @@ const MapData = [
     name: '서울탭룸 | Seoul Taproom',
     locLink: 'https://www.instagram.com/seoul_taproom',
     daumId: 557008339,
+    naverId: 1243796371,
   },
   {
     address: '서울시 서대문구 연희동 188-50',
@@ -519,6 +582,7 @@ const MapData = [
     name: '크래프트비어칸 | Craft Beer Khan',
     locLink: 'https://www.instagram.com/yhd_khan',
     daumId: 27461579,
+    naverId: 35658020,
   },
   {
     address: '전북 전주시 완산구 전라감영3길 12-10',
@@ -527,6 +591,7 @@ const MapData = [
     name: '노매딕 브루잉 컴퍼니 | Nomadic Brewing Company',
     locLink: 'https://www.instagram.com/nomadicbrewingco',
     daumId: 1610406058,
+    naverId: 1080013888,
   },
   {
     address: '서울특별시 마포구 와우산로37길 7',
@@ -535,6 +600,7 @@ const MapData = [
     name: '에일크루 | Ale Crew',
     locLink: 'https://www.instagram.com/alecrew_taphouse/',
     daumId: 81108694,
+    naverId: 1080810206,
   },
   {
     address: '서울시 성북구 성북로 19-1, 2층 (성북동)',
@@ -543,6 +609,7 @@ const MapData = [
     name: '탭하우스 F64 | TAP HOUSE F64',
     locLink: 'https://www.instagram.com/tapf64',
     daumId: 1072330310,
+    naverId: 37880044,
   },
   {
     address: '울산광역시 중구 성남동 94-7',
@@ -551,6 +618,7 @@ const MapData = [
     name: '울산 맥켄지 | ulsan mckenzie',
     locLink: 'https://www.instagram.com/ulsan_mckenzie/',
     daumId: 18820463,
+    naverId: 1204723138,
   },
   {
     address: '서울 관악구 쑥고개로 83',
@@ -559,6 +627,7 @@ const MapData = [
     name: '사운드온더펍 서울대점 | sound on the pub',
     locLink: 'https://www.instagram.com/soundonthepub',
     daumId: 1254168361,
+    naverId: 1272134946,
   },
   {
     address: '경기 광주시 오포읍 양촌안길 14 1층',
@@ -567,6 +636,7 @@ const MapData = [
     name: '카에루 비어 | kaeru beer',
     locLink: 'http://instagram.com/kaeru_beer',
     daumId: 1757362330,
+    naverId: 1479950950,
   },
   {
     address: '대구광역시 수성구 범어로19길 35',
@@ -575,6 +645,7 @@ const MapData = [
     name: '더키크래프트 Thekeycraft',
     locLink: 'https://www.instagram.com/thekeycraftdaegu/',
     daumId: 1171780797,
+    naverId: 1004823965,
   },
   {
     address: '충북 청주시 상당구 교서로32번길 27',
@@ -583,6 +654,7 @@ const MapData = [
     name: '홀리데이 비어 펍 | Holiday Beer Pub ',
     locLink: 'https://www.instagram.com/holiday_beer/',
     daumId: 994412160,
+    naverId: 1131779179,
   },
   {
     address: '서울 용산구 독서당로 46',
@@ -591,6 +663,7 @@ const MapData = [
     name: '세탁소옆집',
     locLink: 'https://www.instagram.com/next_to_laundryshop',
     daumId: 632127554,
+    naverId: 1065069347,
   },
   {
     address: '경남 진주시 신평공원길7번길 12 1층',
@@ -599,6 +672,7 @@ const MapData = [
     name: '진주 탭룸 | Jinju Taproom',
     locLink: 'https://www.instagram.com/jinju_taproom',
     daumId: 766083527,
+    naverId: 1050822037,
   },
   {
     address: '대전 유성구 대덕대로590번길 12-13',
@@ -607,6 +681,7 @@ const MapData = [
     name: '홉홉라운지 | HOPHOPP lounge',
     locLink: 'https://www.instagram.com/hophopp_lounge',
     daumId: 1938458680,
+    naverId: 1438661894,
   },
   {
     address: '강원도 평창군 방림면 고원로 65',
@@ -615,6 +690,7 @@ const MapData = [
     name: '화이트 크로우 평창 탭룸',
     locLink: 'https://www.instagram.com/whitecrowbrewing/',
     daumId: 1976120341,
+    naverId: 1621877893,
   },
   {
     address: '서울시 서초구 반포동 106-7 ',
@@ -623,6 +699,7 @@ const MapData = [
     name: '크래프트브로스 | Craftbros Tap House & Bottle Shop',
     locLink: 'https://www.instagram.com/craftbros_seorae',
     daumId: 24712107,
+    naverId: 35044765,
   },
   {
     address: '대전 유성구 노은로 150 드래곤빌딩 111호 ',
@@ -631,14 +708,16 @@ const MapData = [
     name: '리틀탭 | LITTLE TAP',
     locLink: 'https://www.instagram.com/littletapbeer',
     daumId: 27528638,
+    naverId: 37388581,
   },
   {
     address: '서울시 관악구 봉천동 1601-29 2층',
     latitude: 37.479516,
     longitude: 126.9555,
-    name: '링고 2,3호점 (서울대입구역) | LINGO',
+    name: '링고 (서울대입구역) | LINGO',
     locLink: 'https://www.instagram.com/tap_house_lingo',
     daumId: 24944419,
+    naverId: 36740119,
   },
   {
     address: '경남 김해시 구산로10번길 41',
@@ -647,6 +726,7 @@ const MapData = [
     name: '베이스먼트308 | Basement308',
     locLink: 'http://instagram.com/basement308',
     daumId: 1574496743,
+    naverId: 1234245386,
   },
   {
     address: '경기 성남시 분당구 운중로225번길 14-3 101호',
@@ -655,6 +735,7 @@ const MapData = [
     name: '헤이스탁 | Haystack',
     locLink: 'https://www.instagram.com/haystackbeer',
     daumId: 1327417171,
+    naverId: 1648457728,
   },
   {
     address: '전남 순천시 역전길 57 순천양조장',
@@ -663,6 +744,7 @@ const MapData = [
     name: '순천양조장',
     locLink: 'https://www.instagram.com/suncheon_brewery/',
     daumId: 228401275,
+    naverId: 1572495190,
   },
   {
     address: '충북 충주시 사직로 109',
@@ -671,6 +753,7 @@ const MapData = [
     name: '블루웨일브루하우스 | Blue Whale Brew House',
     locLink: 'https://www.instagram.com/blue_whale_brewhouse',
     daumId: 1715804634,
+    naverId: 1935643014,
   },
   {
     address: '서울시 중구 수표로 68',
@@ -679,6 +762,7 @@ const MapData = [
     name: '서울 비어 프로젝트 | Seoul Beer Project',
     locLink: 'www.instagram.com/seoul.beerproject',
     daumId: 1111474695,
+    naverId: 1199130094,
   },
   {
     address: '서울 용산구 한남대로18길 18 2층',
@@ -687,6 +771,7 @@ const MapData = [
     name: '서울브루어리 한남 | Seoul Brewery - Hannam',
     locLink: 'https://www.instagram.com/seoulbrewery.kitchen',
     daumId: 1703673237,
+    naverId: 1324589783,
   },
   {
     address: '서울시 마포구 서교동 405-3 2층',
@@ -695,6 +780,7 @@ const MapData = [
     name: '크래프트발리(매콤) | Craft Barley(Mccome)',
     locLink: 'https://www.instagram.com/mccome_bistropub/',
     daumId: 103135921,
+    naverId: 36643097,
   },
   {
     address: '강원 속초시 학사평길 7-1',
@@ -703,6 +789,7 @@ const MapData = [
     name: '몽트비어 브루펍 | Mont Beer Brewpub',
     locLink: 'https://www.instagram.com/montbeer_official/',
     daumId: 2135870559,
+    naverId: 1557846495,
   },
   {
     address: '제주시 서귀포시 중앙로35',
@@ -711,6 +798,7 @@ const MapData = [
     name: '제주약수터 (서귀포본점) | JEJU FOUNTAIN SEOGWIPO',
     locLink: 'https://www.instagram.com/jeju_beer_fountain/',
     daumId: 1510813713,
+    naverId: 1259656724,
   },
   {
     address: '대전광역시 유성구 궁동 404-5',
@@ -719,6 +807,7 @@ const MapData = [
     name: '더랜치펍 | The Ranch Pub',
     locLink: 'http://instagram.com/theranchpub',
     daumId: 26561770,
+    naverId: 21348837,
   },
   {
     address: '강원 원주시 남원로 642',
@@ -727,6 +816,7 @@ const MapData = [
     name: '브로이하우스',
     locLink: '',
     daumId: 8390349,
+    naverId: 624021297,
   },
   {
     address: '부산 부산진구 부전로20번길 26 1층',
@@ -735,6 +825,7 @@ const MapData = [
     name: '캐빈보이 | cabin boy',
     locLink: 'https://www.instagram.com/_cabin_boy',
     daumId: 570411391,
+    naverId: 1181567996,
   },
   {
     address: '서울 서초구 방배천로4길 1',
@@ -743,14 +834,16 @@ const MapData = [
     name: '칼리가리 박사의 밀실 사당점 | Caligari Sadang',
     locLink: 'https://www.instagram.com/caligari_milsil_official',
     daumId: 1687157754,
+    naverId: 1959940949,
   },
   {
     address: '서울특별시 마포구 연남동 227-1',
     latitude: 37.561954,
     longitude: 126.926974,
     name: '크래프트원 | craftonepub',
-    locLink: 'https://www.instagram.com/',
+    locLink: 'http://www.instagram.com/craftonepub',
     daumId: 20156353,
+    naverId: 32762630,
   },
   {
     address: '경기 성남시 수정구 위례순환로4길 8 1층',
@@ -759,6 +852,7 @@ const MapData = [
     name: '위례정',
     locLink: 'https://www.instagram.com/craftinhouse2019wiryejung/',
     daumId: 1622242253,
+    naverId: 1248994929,
   },
   {
     address: '경기 성남시 분당구 판교역로18번길 12 지하 1층',
@@ -767,6 +861,7 @@ const MapData = [
     name: '카페에리아',
     locLink: 'https://www.instagram.com/cafe.area',
     daumId: 725217139,
+    naverId: 1279366333,
   },
   {
     address: '인천 중구 신포로15번길45',
@@ -775,6 +870,7 @@ const MapData = [
     name: '인천맥주 | Inchoen Brewery',
     locLink: 'https://www.instagram.com/incheon_brewery',
     daumId: 632607580,
+    naverId: 1587888300,
   },
   {
     address: '서울 마포구 동교로9길 48',
@@ -783,6 +879,7 @@ const MapData = [
     name: '비어티풀 | beertiful',
     locLink: 'https://www.instagram.com/beertiful/',
     daumId: 1651627603,
+    naverId: 1174780206,
   },
   {
     address: '인천 중구 영종대로 166 솔리움센텀스카이 2층 214호',
@@ -791,6 +888,7 @@ const MapData = [
     name: '슬로스브루잉 |  Sloth Brewing',
     locLink: 'https://www.instagram.com/slothbrewing',
     daumId: 1022561613,
+    naverId: 1785492357,
   },
   {
     address: '서울시 광진구 군자동 373-8 2층',
@@ -799,6 +897,7 @@ const MapData = [
     name: '알고 | AL-GO',
     locLink: 'https://www.instagram.com/algo_sausage_official',
     daumId: 1697843723,
+    naverId: 810682299,
   },
   {
     address: '경북 경산시 경산로 42길 4, 1층',
@@ -807,6 +906,7 @@ const MapData = [
     name: '경산브루어리 | kyungsan brewery',
     locLink: 'https://www.instagram.com/kyungsan_brewery',
     daumId: 1725742347,
+    naverId: 1176921335,
   },
   {
     address: '경기 성남시 분당구 판교역로 235 H스퀘어 N동 B107호',
@@ -815,6 +915,7 @@ const MapData = [
     name: '커먼키친 | Common Kitchen',
     locLink: 'https://www.instagram.com/common_kitchen/',
     daumId: 26546053,
+    naverId: 36469887,
   },
   {
     address: '서울 관악구 봉천로 310',
@@ -823,6 +924,7 @@ const MapData = [
     name: '더 펍 사운드온 신림 | The pub sound on (Sinlim)',
     locLink: 'https://www.instagram.com/soundon_sim',
     daumId: 1947066177,
+    naverId: 1413619765,
   },
   {
     address: '서울 마포구 양화로10길 36',
@@ -831,6 +933,7 @@ const MapData = [
     name: '브루하임 | Brewheim',
     locLink: 'http://www.instagram.com/brewheimseoul',
     daumId: 421582356,
+    naverId: 1997046704,
   },
   {
     address: '부산광역시 금정구 장전동 293-45',
@@ -839,6 +942,7 @@ const MapData = [
     name: '벤스하버 | Bens Harbour',
     locLink: 'https://www.instagram.com/bensharbour/',
     daumId: 27384822,
+    naverId: 1406027655,
   },
   {
     address: '서울특별시 광진구 면목로 7길 25 세광빌딩 1층',
@@ -847,6 +951,7 @@ const MapData = [
     name: '미들바틀 | Middle Bottle',
     locLink: 'https://www.instagram.com/middle_bottle',
     daumId: 2031866663,
+    naverId: 1517651376,
   },
   {
     address: '서울시 성북구 성북로7길 36',
@@ -855,6 +960,7 @@ const MapData = [
     name: '쿠바 | CUBAR',
     locLink: 'https://www.instagram.com/_cubar_',
     daumId: 1032145492,
+    naverId: 132130529,
   },
   {
     address: '서울 강동구 고덕로 105',
@@ -871,6 +977,7 @@ const MapData = [
     name: '송정가맥 | songjeong gamaek',
     locLink: 'https://www.instagram.com/songjeong.gamaek/',
     daumId: 1183914250,
+    naverId: 514924680,
   },
   {
     address: '부산 연제구 신촌로23번길 40-22 1층',
@@ -879,6 +986,7 @@ const MapData = [
     name: '이지피지펍 | ezypzy pub',
     locLink: 'https://www.instagram.com/ezypzy_pub',
     daumId: 1218697934,
+    naverId: 1246446404,
   },
   {
     address: '서울시 중구 만리동1가 62-19',
@@ -887,6 +995,7 @@ const MapData = [
     name: '만리199(MANRI199)',
     locLink: 'http://instagram.com/manri199_taproom',
     daumId: 812076679,
+    naverId: 372557663,
   },
   {
     address: '서울 종로구 돈화문로11다길 24',
@@ -895,6 +1004,7 @@ const MapData = [
     name: '칼리가리 박사의 밀실 익선점 | Caligari Ikseon',
     locLink: 'https://www.instagram.com/caligari_milsil_official',
     daumId: 1300928830,
+    naverId: 467288042,
   },
   {
     address: '서울시 강서구 마곡중앙6로45 리더스퀘어 301호',
@@ -903,6 +1013,7 @@ const MapData = [
     name: '비어업 | BEER UP',
     locLink: 'https://www.instagram.com/beerupbottleshop/',
     daumId: 41592077,
+    naverId: 1205241876,
   },
   {
     address: '성동구 서울숲길 55번지',
@@ -911,6 +1022,7 @@ const MapData = [
     name: '바틀5150 | Bottle 5150',
     locLink: 'https://www.instagram.com/bottle5150/',
     daumId: 626049484,
+    naverId: 1312964952,
   },
   {
     address: '충남 보령시 중앙로 97-9',
@@ -919,6 +1031,7 @@ const MapData = [
     name: '보령브루어리 | Boryeong Brewery',
     locLink: 'https://www.instagram.com/boryeong_brewery/',
     daumId: 68243212,
+    naverId: 1764645135,
   },
   {
     address: '부산시 해운대구 해운대로 1244',
@@ -927,6 +1040,7 @@ const MapData = [
     name: '툼브로이 송정 탭룸 | Turmbräu Songjeong Tap Room',
     locLink: 'https://www.instagram.com/turmbrau_korea',
     daumId: 258394418,
+    naverId: 1791164031,
   },
   {
     address: '서울 광진구 구의강변로 106 1층 111-1호',
@@ -935,6 +1049,7 @@ const MapData = [
     name: '더 펍 사운드온 강변 | The pub sound on (kangbyeon)',
     locLink: 'https://www.instagram.com/soundon_kangbyeon',
     daumId: 2097811142,
+    naverId: 1017611657,
   },
   {
     address: '경북 안동시 옥동길 23',
@@ -943,6 +1058,7 @@ const MapData = [
     name: '카즈모스 | KAZMOS',
     locLink: 'https://www.instagram.com/kazmos_andong',
     daumId: 2110412345,
+    naverId: 1748806328,
   },
   {
     address: '인천광역시 남동구 인하로507번길 63',
@@ -951,6 +1067,7 @@ const MapData = [
     name: '올빼미브루펍',
     locLink: 'https://www.instagram.com/owlbrewpub',
     daumId: 2090442702,
+    naverId: 935158690,
   },
   {
     address: '울산시 중구 종가2길 48 1층',
@@ -959,6 +1076,7 @@ const MapData = [
     name: '죠지스 비어 클럽 | georges beer club',
     locLink: 'https://www.instagram.com/georges_beer_club',
     daumId: 175048043,
+    naverId: 1300034495,
   },
   {
     address: '경남 창원시 마산회원구 양덕서8길 25 지하1층',
@@ -967,6 +1085,7 @@ const MapData = [
     name: '한우돌곱창',
     locLink: 'https://www.instagram.com/hanwoo0033',
     daumId: 9557262,
+    naverId: 1192185032,
   },
   {
     address: '서울 강남구 테헤란로83길 14',
@@ -975,7 +1094,7 @@ const MapData = [
     name: '칼리가리 박사의 밀실 삼성점| Caligari Samsung',
     locLink: 'https://www.instagram.com/caligari_milsil_official',
     daumId: 1902125274,
-    naverId: 467288042,
+    naverId: 797439928,
   },
   {
     address: '전북 전주시 완산구 향교길 57',
@@ -984,6 +1103,7 @@ const MapData = [
     name: '노매딕 비어가든 | Nomadic Beer Garden',
     locLink: 'https://www.instagram.com/nomadicbeergarden',
     daumId: 1136971431,
+    naverId: 1881814519,
   },
   {
     address: '대구 남구 명덕로 26길 8 몬순',
@@ -992,6 +1112,7 @@ const MapData = [
     name: '몬순 | monsoon',
     locLink: 'https://www.instagram.com/monsoon_pub',
     daumId: 18833056,
+    naverId: 21581906,
   },
   {
     address: '충남 서산시 동서1로 148-3 1층',
@@ -1000,6 +1121,7 @@ const MapData = [
     name: '칠홉스 | Chillhops',
     locLink: 'https://www.instagram.com/chillhopsbrewingco',
     daumId: 11899805036111,
+    naverId: 1167994624,
   },
   {
     address: '경남 통영시 미우지해안로 103',
@@ -1008,6 +1130,7 @@ const MapData = [
     name: '라인도이치 브루어리 | reindeutsch brewery',
     locLink: 'https://www.instagram.com/reindeutsch2019',
     daumId: 891668319,
+    naverId: 1051932938,
   },
   {
     address: '서울특별시 은평구 연서로 22길 10-1 클라인하우제 1층',
@@ -1016,6 +1139,7 @@ const MapData = [
     name: '키오스크 이피 | Kiosk EP',
     locLink: 'https://www.instagram.com/kiosk.ep',
     daumId: 904760109,
+    naverId: 1212582340,
   },
 ];
 

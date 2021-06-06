@@ -28,14 +28,12 @@
 
 <script>
 
-import MobileFullHeightModalMixin from '@/mixins/MobileFullHeightModal';
 import CollectionModalView from '@/views/Collection/CollectionModalView';
 
 export default {
   components: {
     CollectionModalView,
   },
-  mixins: [MobileFullHeightModalMixin],
   props: {
     map: {
       type: Object,

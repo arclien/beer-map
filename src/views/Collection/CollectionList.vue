@@ -8,7 +8,7 @@
       <ul>
         <li v-for="item in checkInList" :key="item.id" :class="$style.item" @click="$emit('show-place-info-window', item.id)">
           <div :class="$style.name">
-            {{ getMapDataById(item.id).name }}
+            {{ actions.getMapDataById(item.id).name }}
           </div>
           <div :class="$style.date">
             {{ item.date.length }}회 방문. {{ item.date.join(", ") }}
@@ -26,37 +26,42 @@
 </template>
 
 <script>
+import { defineComponent, ref, computed } from '@vue/composition-api';
+
 import MapData from '@/constants/mapData';
 import { getCheckedInData } from '@/utils/CheckedIn.utils';
 import { getMapDataById } from '@/utils/MapData.utils';
 
-export default {
+export default defineComponent({
 
-  data() {
-    return {
-      checkInList: [],
-    };
-  },
-  computed: {
-    summarize() {
-      return `${this.checkInList.length} / ${MapData.length} Checked In!  `;
-    },
-    totalCount() {
-      const total = this.checkInList.reduce((acc, cur) => {
+  setup() {
+    const checkInList = ref([]);
+    checkInList.value = getCheckedInData().sort((a, b) => b.date.length - a.date.length);
+
+    const summarize = computed(() => {
+      return `${checkInList.value.length} / ${MapData.length} Checked In!  `;
+    });
+
+    const totalCount = computed(() => {
+      const total = checkInList.value.reduce((acc, cur) => {
         return acc + cur.date.length;
       }, 0);
       return ` Total ${total}`;
-    },
+    });
+
+    const actions = {
+      getMapDataById,
+    };
+
+    return {
+      checkInList,
+      summarize,
+      totalCount,
+      actions,
+    };
   },
-  created() {
-    this.checkInList = getCheckedInData().sort((a, b) => b.date.length - a.date.length);
-  },
-  methods: {
-    getMapDataById(id) {
-      return getMapDataById(id);
-    },
-  },
-};
+
+});
 </script>
 
 <style lang="scss" module>
