@@ -56,6 +56,8 @@ export default defineComponent({
         state.viewType = state.viewType === VIEW_TYPE.LIST ? VIEW_TYPE.COLLECTION : VIEW_TYPE.LIST;
       },
       showPlaceInfoWindow: (id) => {
+        // TODO
+        // context에서 parent를 참조할 수 없음
         context.$parent.emit('show-place-info-window', id);
       },
     };

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed } from '@vue/composition-api';
+import { defineComponent, ref, unref, computed } from '@vue/composition-api';
 
 import MapData from '@/constants/mapData';
 import { getCheckedInData } from '@/utils/CheckedIn.utils';
@@ -36,14 +36,16 @@ export default defineComponent({
 
   setup() {
     const checkInList = ref([]);
+    // assign을 할 경우에는 unref(checkInList) =  이렇게는 불가능
     checkInList.value = getCheckedInData().sort((a, b) => b.date.length - a.date.length);
 
     const summarize = computed(() => {
-      return `${checkInList.value.length} / ${MapData.length} Checked In!  `;
+      // unref를 하지 않고 checkInList.value로 접근하는 방법도 있다
+      return `${unref(checkInList).length} / ${MapData.length} Checked In!  `;
     });
 
     const totalCount = computed(() => {
-      const total = checkInList.value.reduce((acc, cur) => {
+      const total = unref(checkInList).reduce((acc, cur) => {
         return acc + cur.date.length;
       }, 0);
       return ` Total ${total}`;

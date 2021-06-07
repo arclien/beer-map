@@ -1,36 +1,36 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.icons">
-      <div :class="[$style.icon, $style.zoomIn]" @click="zoomIn">
+      <div :class="[$style.icon, $style.zoomIn]" @click="actions.zoomIn">
         <font-awesome-icon icon="search-plus" />
       </div>
 
-      <div :class="[$style.icon, $style.relocate]" @click="relocateCurrentPosition">
+      <div :class="[$style.icon, $style.relocate]" @click="actions.relocateCurrentPosition">
         <font-awesome-icon icon="location-arrow" />
       </div>
       <div :class="[$style.icon, $style.searchLocation]" @click="() => {}">
         <font-awesome-icon icon="search-location" />
       </div>
 
-      <div :class="[$style.icon, $style.history]" @click="showCollectionHistory">
+      <div :class="[$style.icon, $style.history]" @click="actions.showCollectionHistory">
         <font-awesome-icon icon="history" />
       </div>
 
-      <div :class="[$style.icon, $style.zoomOut]" @click="zoomOut">
+      <div :class="[$style.icon, $style.zoomOut]" @click="actions.zoomOut">
         <font-awesome-icon icon="search-minus" />
       </div>
     </div>
     <template v-if="isModalOpen">
-      <CollectionModalView :close-modal-callback="closeModalCallback" />
+      <CollectionModalView :close-modal-callback="actions.closeModalCallback" />
     </template>
   </div>
 </template>
 
 <script>
-
+import { defineComponent, ref, unref } from '@vue/composition-api';
 import CollectionModalView from '@/views/Collection/CollectionModalView';
 
-export default {
+export default defineComponent({
   components: {
     CollectionModalView,
   },
@@ -48,32 +48,47 @@ export default {
       default: () => {},
     },
   },
-  data() {
+
+  setup(props) {
+    const isModalOpen = ref(false);
+
+    const relocateCurrentPosition = () => {
+      const { getGeoLocation, myGeoLocation, map } = unref(props);
+      getGeoLocation();
+      const { lat, lng } = myGeoLocation;
+      const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
+      map.panTo(moveLatLon);
+    };
+    const zoomIn = () => {
+      const { map } = unref(props);
+      map.setLevel(map.getLevel() - 1);
+    };
+    const zoomOut = () => {
+      const { map } = unref(props);
+      map.setLevel(map.getLevel() + 1);
+    };
+    const showCollectionHistory = () => {
+      isModalOpen.value = true;
+    };
+    const closeModalCallback = () => {
+      isModalOpen.value = false;
+    };
+
+    const actions = {
+      relocateCurrentPosition,
+      zoomIn,
+      zoomOut,
+      showCollectionHistory,
+      closeModalCallback,
+    };
+
     return {
-      isModalOpen: false,
+      isModalOpen,
+      actions,
     };
   },
-  methods: {
-    relocateCurrentPosition() {
-      this.getGeoLocation();
-      const { lat, lng } = this.myGeoLocation;
-      const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
-      this.map.panTo(moveLatLon);
-    },
-    zoomIn() {
-      this.map.setLevel(this.map.getLevel() - 1);
-    },
-    zoomOut() {
-      this.map.setLevel(this.map.getLevel() + 1);
-    },
-    showCollectionHistory() {
-      this.isModalOpen = true;
-    },
-    closeModalCallback() {
-      this.isModalOpen = false;
-    },
-  },
-};
+
+});
 </script>
 
 <style lang="scss" module>
