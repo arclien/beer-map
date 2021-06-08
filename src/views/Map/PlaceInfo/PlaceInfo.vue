@@ -2,18 +2,18 @@
   <div :class="[$style.container, { [$style.isExpanded]: isExpanded }]">
     <div :class="$style.info">
       <template v-if="placeInfo.daumId">
-        <div :class="$style.expandIcon" @click="setExpanded">
+        <div :class="$style.expandIcon" @click="actions.setExpanded">
           <font-awesome-icon v-if="isExpanded" icon="chevron-down" />
           <font-awesome-icon v-else-if="!isExpanded" icon="chevron-up" />
         </div>
       </template>
       <template v-if="hasCheckedIn">
-        <div :class="$style.checkedIn" @click="openCheckInModal">
+        <div :class="$style.checkedIn" @click="actions.openCheckInModal">
           <font-awesome-icon icon="check" />
         </div>
       </template>
       <template v-else>
-        <div :class="$style.checkIn" @click="openCheckInModal">
+        <div :class="$style.checkIn" @click="actions.openCheckInModal">
           체크인
         </div>
       </template>
@@ -37,13 +37,13 @@
           <div :class="$style.title">
             링크
           </div>
-          <div :class="$style.text" @click="openUrl(placeInfo.locLink)">
+          <div :class="$style.text" @click="actions.browserOpen(placeInfo.locLink)">
             {{ placeInfo.locLink }}
           </div>
         </div>
 
         <div v-if="isAbleToChangeMapView" :class="$style.row">
-          <div :class="$style.title" @click="setKakaoMapView">
+          <div :class="$style.title" @click="actions.setKakaoMapView">
             {{ isKakaoMapView ? '네이버' : '카카오' }}맵으로 전환
           </div>
         </div>
@@ -57,18 +57,18 @@
 </template>
 
 <script>
-
+import { defineComponent, ref, unref, computed, watch } from '@vue/composition-api';
 import PlaceIframeView from '../PlaceIframeView/PlaceIframeView';
 
-import DialogModal from '@/mixins/DialogModal';
+import useDialogModal from '@/composable/useDialogModal';
 import { hasCheckedInById, setCheckedIn } from '@/utils/CheckedIn.utils';
 import { getTodayDate } from '@/utils/day';
 import { browserOpen } from '@/utils/utils';
-export default {
+
+export default defineComponent({
   components: {
     PlaceIframeView,
   },
-  mixins: [DialogModal],
   props: {
     currentPlaceInfo: {
       type: Object,
@@ -76,79 +76,83 @@ export default {
     },
   },
 
-  data() {
-    return {
-      isExpanded: false,
-      placeInfo: this.currentPlaceInfo,
-      isKakaoMapView: true,
-      hasCheckedIn: false,
+  setup(props, context) {
+    const { openModal, closeModal } = useDialogModal(context);
+
+    const isExpanded = ref(false);
+    const placeInfo = ref(props.currentPlaceInfo);
+    const isKakaoMapView = ref(true);
+    const hasCheckedIn = ref(false);
+
+    const { daumId } = unref(placeInfo);
+    hasCheckedIn.value = hasCheckedInById(daumId);
+
+    const isAbleToChangeMapView = computed(() => {
+      const { daumId, naverId } = unref(placeInfo);
+      return isExpanded.value && daumId && naverId;
+    });
+
+    watch(() => props.currentPlaceInfo, (newData) => {
+      placeInfo.value = newData;
+      hasCheckedIn.value = hasCheckedInById(placeInfo.value.daumId);
+      isKakaoMapView.value = true;
+    });
+
+    const setExpanded = () => {
+      isExpanded.value = !isExpanded.value;
     };
-  },
 
-  computed: {
-    isAbleToChangeMapView() {
-      const { daumId, naverId } = this.placeInfo;
-      return this.isExpanded && daumId && naverId;
-    },
-  },
-  watch: {
-    currentPlaceInfo: {
-      handler(newData) {
-        this.placeInfo = newData;
-        this.hasCheckedIn = hasCheckedInById(this.placeInfo.daumId);
-        this.isKakaoMapView = true;
-      },
-    },
-  },
-  created() {
-    const { daumId } = this.placeInfo;
-    this.hasCheckedIn = hasCheckedInById(daumId);
-  },
-  mounted() {
-    // console.log(this.placeInfo);
-  },
+    const setKakaoMapView = () => {
+      isKakaoMapView.value = !isKakaoMapView.value;
+    };
 
-  methods: {
-    setExpanded() {
-      this.isExpanded = !this.isExpanded;
-    },
-    setKakaoMapView() {
-      this.isKakaoMapView = !this.isKakaoMapView;
-    },
-    openUrl(link) {
-      browserOpen(link);
-    },
-    openCheckInModal() {
-      const { name } = this.placeInfo;
-
-      this.openModal({
-        title: `${name}`,
-        text: this.hasCheckedIn ? '이미 체크인 하셨습니다.' : `${getTodayDate()}에 체크인 하시겠습니까?`,
-        handler: [
-          {
-            title: '취소',
-            callback: () => this.closeModal(),
-          },
-          {
-            title: this.hasCheckedIn ? '확인' : 'Booze Up!',
-            callback: () => {
-              this.setCheckedIn();
-              this.closeModal();
-            },
-          },
-        ],
-      });
-    },
-    setCheckedIn() {
-      const { daumId } = this.placeInfo;
+    const checkedIn = () => {
+      const { daumId } = unref(placeInfo);
       setCheckedIn({
         id: daumId,
         date: getTodayDate(),
       });
-      this.hasCheckedIn = hasCheckedInById(daumId);
-    },
+      hasCheckedIn.value = hasCheckedInById(daumId);
+    };
+
+    const openCheckInModal = () => {
+      const { name } = unref(placeInfo);
+
+      openModal({
+        title: `${name}`,
+        text: unref(hasCheckedIn) ? '이미 체크인 하셨습니다. 다시 체크인 하시겠습니까?' : `${getTodayDate()}에 체크인 하시겠습니까?`,
+        handler: [
+          {
+            title: '취소',
+            callback: () => closeModal(),
+          },
+          {
+            title: '체크인',
+            callback: () => {
+              checkedIn();
+              closeModal();
+            },
+          },
+        ],
+      });
+    };
+
+    const actions = {
+      setExpanded,
+      setKakaoMapView,
+      browserOpen,
+      openCheckInModal,
+    };
+    return {
+      isExpanded,
+      placeInfo,
+      isKakaoMapView,
+      hasCheckedIn,
+      isAbleToChangeMapView,
+      actions,
+    };
   },
-};
+});
 </script>
 
 <style lang="scss" module>

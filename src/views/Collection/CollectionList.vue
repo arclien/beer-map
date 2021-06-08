@@ -6,9 +6,9 @@
         {{ totalCount }}
       </div>
       <ul>
-        <li v-for="item in checkInList" :key="item.id" :class="$style.item" @click="$emit('show-place-info-window', item.id)">
+        <li v-for="item in checkInList" :key="item.id" :class="$style.item" @click="actions.showPlaceInfoWindow(item.id)">
           <div :class="$style.name">
-            {{ getMapDataById(item.id).name }}
+            {{ actions.getMapDataById(item.id).name }}
           </div>
           <div :class="$style.date">
             {{ item.date.length }}회 방문. {{ item.date.join(", ") }}
@@ -26,37 +26,49 @@
 </template>
 
 <script>
+import { defineComponent, ref, unref, computed } from '@vue/composition-api';
+
+import useKakaoMap from '@/composable/useKakaoMap';
 import MapData from '@/constants/mapData';
 import { getCheckedInData } from '@/utils/CheckedIn.utils';
 import { getMapDataById } from '@/utils/MapData.utils';
 
-export default {
+export default defineComponent({
 
-  data() {
-    return {
-      checkInList: [],
-    };
-  },
-  computed: {
-    summarize() {
-      return `${this.checkInList.length} / ${MapData.length} Checked In!  `;
-    },
-    totalCount() {
-      const total = this.checkInList.reduce((acc, cur) => {
+  setup() {
+    const {
+      showPlaceInfoWindow,
+    } = useKakaoMap();
+
+    const checkInList = ref([]);
+    // assign을 할 경우에는 unref(checkInList) =  이렇게는 불가능
+    checkInList.value = getCheckedInData().sort((a, b) => b.date.length - a.date.length);
+
+    const summarize = computed(() => {
+      // unref를 하지 않고 checkInList.value로 접근하는 방법도 있다
+      return `${unref(checkInList).length} / ${MapData.length} Checked In!  `;
+    });
+
+    const totalCount = computed(() => {
+      const total = unref(checkInList).reduce((acc, cur) => {
         return acc + cur.date.length;
       }, 0);
       return ` Total ${total}`;
-    },
+    });
+    const actions = {
+      getMapDataById,
+      showPlaceInfoWindow,
+    };
+
+    return {
+      checkInList,
+      summarize,
+      totalCount,
+      actions,
+    };
   },
-  created() {
-    this.checkInList = getCheckedInData().sort((a, b) => b.date.length - a.date.length);
-  },
-  methods: {
-    getMapDataById(id) {
-      return getMapDataById(id);
-    },
-  },
-};
+
+});
 </script>
 
 <style lang="scss" module>
