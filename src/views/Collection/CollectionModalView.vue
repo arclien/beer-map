@@ -9,10 +9,10 @@
       <template #body>
         <div :class="$style.container">
           <template v-if="viewType === VIEW_TYPE.LIST">
-            <collection-list @show-place-info-window="actions.showPlaceInfoWindow" />
+            <collection-list />
           </template>
           <template v-else-if="viewType === VIEW_TYPE.COLLECTION">
-            <collection-grid @show-place-info-window="actions.showPlaceInfoWindow" />
+            <collection-grid />
           </template>
         </div>
       </template>
@@ -54,11 +54,6 @@ export default defineComponent({
       closeModalCallbackFunc: props.closeModalCallback,
       changeViewType: () => {
         state.viewType = state.viewType === VIEW_TYPE.LIST ? VIEW_TYPE.COLLECTION : VIEW_TYPE.LIST;
-      },
-      showPlaceInfoWindow: (id) => {
-        // TODO
-        // context에서 parent를 참조할 수 없음
-        context.$parent.emit('show-place-info-window', id);
       },
     };
 

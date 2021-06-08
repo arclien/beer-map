@@ -1,23 +1,35 @@
 <template>
   <div :class="$style.container">
     <div v-for="item in MapData" :key="item.daumId"
-         :class="[$style.item, { [$style.checkedIn]: hasCheckedInById(item.daumId) }]"
-         @click="$emit('show-place-info-window', item.daumId)">
+         :class="[$style.item, { [$style.checkedIn]: actions.hasCheckedInById(item.daumId) }]"
+         @click="actions.showPlaceInfoWindow(item.daumId)">
       <span>{{ item.name }}</span>
     </div>
   </div>
 </template>
 
 <script>
+
 import { defineComponent } from '@vue/composition-api';
+import useKakaoMap from '@/composable/useKakaoMap';
+
 import MapData from '@/constants/mapData';
 import { hasCheckedInById } from '@/utils/CheckedIn.utils';
 
 export default defineComponent({
   setup() {
+
+    const {
+      showPlaceInfoWindow,
+    } = useKakaoMap();
+
+    const actions = {
+      showPlaceInfoWindow,
+      hasCheckedInById,
+    };
     return {
       MapData,
-      hasCheckedInById,
+      actions,
     };
   },
 });

@@ -6,7 +6,7 @@
         {{ totalCount }}
       </div>
       <ul>
-        <li v-for="item in checkInList" :key="item.id" :class="$style.item" @click="$emit('show-place-info-window', item.id)">
+        <li v-for="item in checkInList" :key="item.id" :class="$style.item" @click="actions.showPlaceInfoWindow(item.id)">
           <div :class="$style.name">
             {{ actions.getMapDataById(item.id).name }}
           </div>
@@ -28,6 +28,7 @@
 <script>
 import { defineComponent, ref, unref, computed } from '@vue/composition-api';
 
+import useKakaoMap from '@/composable/useKakaoMap';
 import MapData from '@/constants/mapData';
 import { getCheckedInData } from '@/utils/CheckedIn.utils';
 import { getMapDataById } from '@/utils/MapData.utils';
@@ -35,6 +36,10 @@ import { getMapDataById } from '@/utils/MapData.utils';
 export default defineComponent({
 
   setup() {
+    const {
+      showPlaceInfoWindow,
+    } = useKakaoMap();
+
     const checkInList = ref([]);
     // assign을 할 경우에는 unref(checkInList) =  이렇게는 불가능
     checkInList.value = getCheckedInData().sort((a, b) => b.date.length - a.date.length);
@@ -50,9 +55,9 @@ export default defineComponent({
       }, 0);
       return ` Total ${total}`;
     });
-
     const actions = {
       getMapDataById,
+      showPlaceInfoWindow,
     };
 
     return {
