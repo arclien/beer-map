@@ -92,7 +92,7 @@ export default defineComponent({
       return isExpanded.value && daumId && naverId;
     });
 
-    watch(props.currentPlaceInfo, (newData) => {
+    watch(() => props.currentPlaceInfo, (newData) => {
       placeInfo.value = newData;
       hasCheckedIn.value = hasCheckedInById(placeInfo.value.daumId);
       isKakaoMapView.value = true;

@@ -28,6 +28,7 @@
 
 <script>
 import { defineComponent, ref, unref } from '@vue/composition-api';
+import useGeoLocation from '@/composable/useGeoLocation';
 import CollectionModalView from '@/views/Collection/CollectionModalView';
 
 export default defineComponent({
@@ -39,22 +40,17 @@ export default defineComponent({
       type: Object,
       default: () => {},
     },
-    myGeoLocation: {
-      type: Object,
-      default: () => {},
-    },
-    getGeoLocation: {
-      type: Function,
-      default: () => {},
-    },
   },
 
   setup(props) {
     const isModalOpen = ref(false);
 
     const relocateCurrentPosition = () => {
-      const { getGeoLocation, myGeoLocation, map } = unref(props);
+      const { map } = unref(props);
+      const { myGeoLocation, getGeoLocation } = useGeoLocation();
+
       getGeoLocation();
+
       const { lat, lng } = myGeoLocation;
       const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
       map.panTo(moveLatLon);

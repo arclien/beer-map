@@ -3,8 +3,6 @@
     <div id="container" ref="container"></div>
     <MapOption
       :map="kakaoMap"
-      :my-geo-location="myGeoLocation"
-      :get-geo-location="getGeoLocation"
       @show-place-info-window="showPlaceInfoWindow" />
 
     <template v-if="isVisiblePlaceInfoWindow">
@@ -16,15 +14,15 @@
 </template>
 
 <script>
+import { defineComponent, ref, unref, computed, watch, onMounted, getCurrentInstance } from '@vue/composition-api';
 import MapOption from './MapOption/MapOption';
 import PlaceInfo from './PlaceInfo/PlaceInfo';
 import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 
+import useGeoLocation from '@/composable/useGeoLocation';
 import {
   KAKAO_APP_KEY,
   KAKAO_SDK_URI,
-  DEFAULT_GEO,
-  GEO_OPTIONS,
   MapSize,
   MapLevel,
 } from '@/constants/kakaoMap';
@@ -38,55 +36,42 @@ import { isEmptyObject } from '@/utils/utils';
 
 let selectedMarker = null;
 
-export default {
+export default defineComponent({
   components: {
     MapOption,
     LoadingSpinner,
     PlaceInfo,
   },
-  data() {
-    return {
-      kakaoMap: null,
-      myGeoLocation: {},
-      markerData: [],
-      markers: [],
-      currentPlaceInfo: {},
-      checkInPlaceId: null,
-      isVisiblePlaceInfo: false,
-    };
-  },
-  computed: {
-    isVisiblePlaceInfoWindow() {
+
+  setup() {
+    const internalInstance = getCurrentInstance();
+
+    const kakaoMap = ref(null);
+    const myGeoLocation = ref({});
+    const markerData = ref([]);
+    const markers = ref([]);
+    const currentPlaceInfo = ref({});
+    const checkInPlaceId = ref(null);
+    const isVisiblePlaceInfo = ref(false);
+
+    const isVisiblePlaceInfoWindow = computed(() => {
       return (
-        (this.isVisiblePlaceInfo || this.checkInPlaceId) &&
-        !isEmptyObject(this.currentPlaceInfo)
+        (isVisiblePlaceInfo.value || checkInPlaceId.value) &&
+        !isEmptyObject(currentPlaceInfo.value)
       );
-    },
-  },
-  watch: {
-    kakaoMap: function () {
-      this.setMapClickEventListener();
-      this.setMarkerOnMap();
-    },
-    myGeoLocation: function () {
-      this.initMap();
-    },
-  },
+    });
 
-  created() {
-    this.getGeoLocation();
-    this.markerData = MapData;
-  },
+    const { getGeoLocation } = useGeoLocation();
 
-  mounted() {
-    this.addKakaoMapScript();
-  },
+    getGeoLocation().then((data) => {
+      myGeoLocation.value = data;
+    });
+    markerData.value = MapData;
 
-  methods: {
-    initMap() {
+    const initMap = () => {
       if (!window.kakao || !window.kakao.maps) return;
 
-      const { lat, lng } = this.myGeoLocation;
+      const { lat, lng } = unref(myGeoLocation);
       if (!lat || !lng) return;
       // 지도를 생성할 때 필요한 기본 옵션
       const options = {
@@ -97,7 +82,7 @@ export default {
       };
       // map
       const mapObj = new window.kakao.maps.Map(
-        this.$refs.container,
+        internalInstance.refs.container,
         // eslint-disable-next-line comma-dangle
         options
       );
@@ -105,8 +90,8 @@ export default {
       const center = mapObj.getCenter();
 
       const { width, height } = MapSize;
-      this.$refs.container.style.width = width;
-      this.$refs.container.style.height = height;
+      internalInstance.refs.container.style.width = width;
+      internalInstance.refs.container.style.height = height;
 
       // 맵 레이아웃 업데이트
       mapObj.relayout();
@@ -122,59 +107,39 @@ export default {
         mapObj,
       });
       currentOverlay.setMap(mapObj);
-      this.kakaoMap = mapObj;
-    },
+      kakaoMap.value = mapObj;
+    };
 
-    addKakaoMapScript() {
+    const addKakaoMapScript = () => {
       const script = document.createElement('script');
       /* global kakao */
-      script.onload = () => kakao.maps.load(this.initMap);
+      script.onload = () => kakao.maps.load(initMap);
       script.src = `${KAKAO_SDK_URI()}?autoload=false&appkey=${KAKAO_APP_KEY}`;
       document.head.appendChild(script);
 
       const scriptLibrary = document.createElement('script');
       scriptLibrary.src = `${KAKAO_SDK_URI()}?autoload=false&libraries=services&appkey=${KAKAO_APP_KEY}`;
       document.head.appendChild(scriptLibrary);
-    },
-
-    getGeoLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            const {
-              coords: { latitude, longitude },
-            } = position;
-            const latLng = { lat: latitude, lng: longitude };
-            this.myGeoLocation = latLng;
-          },
-          () => {
-            alert('현재 지역 정보를 받아올 수 없습니다.');
-            this.myGeoLocation = DEFAULT_GEO;
-          },
-          GEO_OPTIONS,
-        );
-      }
-    },
+    };
 
     // 마커를 제외한 맵 클릭시 초기화
-    setMapClickEventListener() {
-      if (this.kakaoMap === null) {
+    const setMapClickEventListener = () => {
+      if (kakaoMap.value === null) {
         return;
       }
 
-      window.kakao.maps.event.addListener(this.kakaoMap, 'click', () => {
-        this.currentPlaceInfo = {};
-        this.isVisiblePlaceInfo = false;
+      window.kakao.maps.event.addListener(kakaoMap.value, 'click', () => {
+        currentPlaceInfo.value = {};
+        isVisiblePlaceInfo.value = false;
         if (selectedMarker) {
           selectedMarker.setImage(selectedMarker.normalImage);
           selectedMarker = null;
         }
       });
-    },
+    };
 
-    // 맵에 마커 추가
-    setMarkerOnMap() {
-      if (this.kakaoMap === null) {
+    const setMarkerOnMap = () => {
+      if (kakaoMap.value === null) {
         return;
       }
       if (!window?.kakao || window?.kakao?.maps === null) {
@@ -182,9 +147,9 @@ export default {
       }
 
       // clear prev markers
-      this.markers = this.markers.forEach(marker => marker.setMap(null));
+      markers.value = markers.value.forEach(marker => marker.setMap(null));
       // assign new markers
-      this.markers = this.markerData.map(el => {
+      markers.value = markerData.value.map(el => {
         const { latitude, longitude, daumId } = el;
 
         const hasCheckedIn = hasCheckedInById(daumId);
@@ -198,7 +163,7 @@ export default {
 
         // 마커를 생성하고 이미지는 기본 마커 이미지를 사용합니다
         const marker = new window.kakao.maps.Marker({
-          map: this.kakaoMap,
+          map: kakaoMap.value,
           position: new window.kakao.maps.LatLng(latitude, longitude),
           image: hasCheckedIn ? checkedInImage : normalImage,
         });
@@ -217,7 +182,7 @@ export default {
           if (!selectedMarker || selectedMarker !== marker) {
             marker.setImage(overImage);
           }
-          infowindow.open(this.kakaoMap, marker);
+          infowindow.open(kakaoMap.value, marker);
         });
 
         // 마커에 mouseout 이벤트를 등록합니다
@@ -232,8 +197,9 @@ export default {
 
         // 마커에 click 이벤트를 등록합니다
         window.kakao.maps.event.addListener(marker, 'click', () => {
-          this.currentPlaceInfo = el;
-          this.isVisiblePlaceInfo = true;
+
+          currentPlaceInfo.value = el;
+          isVisiblePlaceInfo.value = true;
           // 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
           // 마커의 이미지를 클릭 이미지로 변경합니다
           if (!selectedMarker || selectedMarker !== marker) {
@@ -252,14 +218,36 @@ export default {
 
         return marker;
       });
-    },
+    };
 
-    showPlaceInfoWindow(id) {
-      this.currentPlaceInfo = getMapDataById(id);
-      this.isVisiblePlaceInfo = true;
-    },
+    const showPlaceInfoWindow = (id) => {
+      currentPlaceInfo.value = getMapDataById(id);
+      isVisiblePlaceInfo.value = true;
+    };
+
+    watch(kakaoMap, () => {
+      setMapClickEventListener();
+      setMarkerOnMap();
+    });
+
+    watch(myGeoLocation, () => {
+      initMap();
+    });
+
+    onMounted(() => {
+      addKakaoMapScript();
+    });
+
+    return {
+      isVisiblePlaceInfoWindow,
+      showPlaceInfoWindow,
+      kakaoMap,
+      currentPlaceInfo,
+    };
+
   },
-};
+
+});
 </script>
 
 <style>

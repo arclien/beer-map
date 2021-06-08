@@ -38,6 +38,7 @@ export default defineComponent({
         KakaoPlaceMobileUrl + daumId :
         NaverPlaceMobileUrl + naverId;
     });
+
     return {
       url,
     };
