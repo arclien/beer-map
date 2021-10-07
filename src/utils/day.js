@@ -1,7 +1,8 @@
 import dayjs from 'dayjs';
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import { CalendarFormat, PERIOD } from '@/constants/calendar';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+
+import { CalendarFormat, PERIOD } from 'constants/calendar';
 
 dayjs.extend(isSameOrBefore).extend(isSameOrAfter);
 
@@ -31,12 +32,12 @@ export const getAddedDate = (
   startDate,
   offset = 1,
   period = PERIOD.D,
-  format = CalendarFormat,
+  format = CalendarFormat
 ) => dayjs(startDate).add(offset, period).format(format);
 
 export const getSubtractedDate = (
   startDate,
   offset = 1,
   period = PERIOD.D,
-  format = CalendarFormat,
+  format = CalendarFormat
 ) => dayjs(startDate).subtract(offset, period).format(format);

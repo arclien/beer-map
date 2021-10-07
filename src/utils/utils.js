@@ -1,5 +1,6 @@
-/* eslint-disable no-param-reassign */
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { enableBodyScroll } from 'body-scroll-lock';
 
 export const getRoundTwoPrecision = (number) => Math.round(number * 100) / 100;
 
@@ -50,11 +51,29 @@ export const isBrowserIE = () => {
 export const browserOpen = (
   address,
   target = '_blank',
-  features = !isBrowserIE() ? 'noopener=yes,noreferrer=yes' : '',
+  features = !isBrowserIE() ? 'noopener=yes,noreferrer=yes' : ''
 ) => {
   window.open(address, target, features);
 };
 
-export const getObjectById = (id, obj) => {
-  return obj.find((el) => el.id === id) || null;
+export const renderHtmlWithNewLine = (string) =>
+  string.split('\n').map((line) => {
+    return (
+      <span key={line}>
+        {line}
+        <br />
+      </span>
+    );
+  });
+
+export const enableBodyScrollLock = (
+  bodyScrollLockTarget,
+  delegateCloseControl = false
+) => {
+  if (!delegateCloseControl && bodyScrollLockTarget) {
+    const targetNode = document.querySelector(bodyScrollLockTarget);
+    if (targetNode !== null) {
+      enableBodyScroll(targetNode);
+    }
+  }
 };

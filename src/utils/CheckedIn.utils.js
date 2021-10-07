@@ -1,6 +1,5 @@
-import { CHECK_IN_HISTORY } from '@/constants/checkin';
-import { Storage } from '@/services/storage';
-import { getObjectById } from '@/utils/utils';
+import { CHECK_IN_HISTORY } from 'constants/checkin';
+import { Storage } from 'services/storage';
 
 export const getCheckedInData = () => {
   return Storage.getItem(CHECK_IN_HISTORY) || [];
@@ -8,25 +7,10 @@ export const getCheckedInData = () => {
 
 export const hasCheckedInById = (id) => {
   const checkInData = getCheckedInData();
-  const checkInHistory = getObjectById(id, checkInData);
-  return checkInHistory;
+  return checkInData.indexOf(id) >= 0;
 };
 
-export const setCheckedIn = (data) => {
+export const setCheckedIn = (id) => {
   const checkInData = getCheckedInData();
-  const checkInHistory = getObjectById(data.id, checkInData) || {};
-  Storage.setItem(CHECK_IN_HISTORY, [
-    ...checkInData.filter((el) => el.id !== data.id),
-    mergeCheckedInHistory(checkInHistory, data),
-  ]);
-};
-
-const mergeCheckedInHistory = (prev, cur) => {
-  return !prev.id ? {
-    id: cur.id,
-    date: [cur.date],
-  } : {
-    id: prev.id,
-    date: [...new Set([...prev.date, cur.date])],
-  };
+  Storage.setItem(CHECK_IN_HISTORY, [...checkInData, id]);
 };

@@ -37,7 +37,7 @@ export const Storage = {
    * @param key key
    * @param {boolean} isSession 세션스토리지 사용 여부
    */
-  removeItem(key, isSession = false) {
+  removeItem(key, isSession = false, preserved = false) {
     this.getStorage(isSession).removeItem(key);
   },
 

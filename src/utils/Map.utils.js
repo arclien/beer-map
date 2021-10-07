@@ -1,4 +1,3 @@
-import checkedInImageFile from '@/assets/images/ico-support-local-pin.png';
 import {
   SPRITE_MARKER_URL,
   MARKER_WIDTH,
@@ -12,7 +11,9 @@ import {
   SPRITE_WIDTH,
   SPRITE_HEIGHT,
   SPRITE_GAP,
-} from '@/constants/kakaoMap';
+} from 'constants/kakaoMap';
+
+import checkedInImageFile from 'assets/images/ico-support-local-pin.png';
 
 // MakrerImage 객체를 생성하여 반환하는 함수입니다
 export const createMarkerImage = (
@@ -20,7 +21,7 @@ export const createMarkerImage = (
   offset,
   spriteOrigin,
   spriteImageSize,
-  imageUrl,
+  imageUrl
 ) => {
   if (!window?.kakao || window?.kakao?.maps === null) {
     return;
@@ -34,7 +35,7 @@ export const createMarkerImage = (
       offset, // 마커 이미지에서의 기준 좌표
       spriteOrigin, // 스트라이프 이미지 중 사용할 영역의 좌상단 좌표
       spriteSize: spriteImageSize, // 스프라이트 이미지의 크기
-    },
+    }
   );
 
   return markerImage;
@@ -50,7 +51,7 @@ export const getMarkerImages = () => {
   const markerOffset = new KakaoMapObj.Point(OFFSET_X, OFFSET_Y); // 기본, 클릭 마커의 기준좌표
   const overMarkerSize = new KakaoMapObj.Size(
     OVER_MARKER_WIDTH,
-    OVER_MARKER_HEIGHT,
+    OVER_MARKER_HEIGHT
   ); // 오버 마커의 크기
   const overMarkerOffset = new KakaoMapObj.Point(OVER_OFFSET_X, OVER_OFFSET_Y); // 오버 마커의 기준 좌표
   const spriteImageSize = new KakaoMapObj.Size(SPRITE_WIDTH, SPRITE_HEIGHT); // 스프라이트 이미지의 크기
@@ -68,26 +69,26 @@ export const getMarkerImages = () => {
     markerSize,
     markerOffset,
     normalOrigin,
-    spriteImageSize,
+    spriteImageSize
   );
   const overImage = createMarkerImage(
     overMarkerSize,
     overMarkerOffset,
     overOrigin,
-    spriteImageSize,
+    spriteImageSize
   );
   const clickImage = createMarkerImage(
     markerSize,
     markerOffset,
     clickOrigin,
-    spriteImageSize,
+    spriteImageSize
   );
   const checkedInImage = createMarkerImage(
     new KakaoMapObj.Size(40, 46),
     new KakaoMapObj.Point(12, OFFSET_Y),
     normalOrigin,
     new KakaoMapObj.Size(40, 46),
-    checkedInImageFile,
+    checkedInImageFile
   );
 
   return {
