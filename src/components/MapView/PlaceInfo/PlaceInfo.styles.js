@@ -106,23 +106,12 @@ export const Logo = styled.img`
   top: -47px;
 `;
 
-export const NewPlace = styled.div`
-  width: 70px;
+export const Icons = styled.div`
+  z-index: 999;
+  width: 100px;
+  height: 34px;
   position: absolute;
   right: -11px;
   top: -15px;
-  text-align:right;
-  cursor:pointer;
-
-  font-size: 14px;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-  z-index: 100;
-  line-height: 1.86;
-  text-align:center;
-  letter-spacing: -1.23px;
-  border-radius: 4px;
-  box-shadow: rgb(0 0 0 / 30%) 2px 2px 0px 0px, rgb(135 135 135) 4px 4px 0px 0px inset, rgb(35 35 35) -4px -4px 0px 0px inset;
-  border: 2px solid rgb(0, 0, 0);
-  background-color: rgb(56, 56, 56);
-`
+  text-align: right;
+`;

@@ -13,15 +13,15 @@ export const DRINK = {
   wine: '와인',
   makgeolli: '막걸리',
   shot: '샷',
-  etc: '그외',
+  etc: '그 외',
 };
 
 export const FOOD = {
   pizza: '피자',
   hamburger: '햄버거',
-  fries: '프라이',
   meat: '고기',
-  fingerfood: '핑거푸드',
+  american: '아메리칸',
+  japanese: '일식',
   chicken: '치킨',
-  etc: '그외',
+  etc: '그 외',
 };

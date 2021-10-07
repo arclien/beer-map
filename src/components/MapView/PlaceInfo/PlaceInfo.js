@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronUp,
+  faChevronDown,
+  faBeer,
+  faWineBottle,
+  faWineGlass,
+  faCocktail,
+  faPizzaSlice,
+  faHamburger,
+  faFish,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { hasCheckedInById } from 'utils/CheckedIn.utils';
@@ -7,6 +17,7 @@ import PlaceKakaoView from '../PlaceKakaoView/PlaceKakaoView';
 import PlaceNaverView from '../PlaceNaverView/PlaceNaverView';
 import { errorToast } from 'utils/toast';
 import { browserOpen } from 'utils/utils';
+import { FOOD, DRINK } from 'utils/Text.utils';
 
 import {
   Container,
@@ -18,17 +29,17 @@ import {
   Header,
   ExpandIcon,
   Logo,
-  NewPlace,
+  Icons,
 } from './PlaceInfo.styles';
 
-import LogoSupportLocal from 'assets/images/logo-support-local.png';
+import MacDuck from 'assets/images/macduck.png';
 
 const PlaceInfo = ({ currentPlaceInfo }) => {
   const [isExpanded, setExpanded] = useState(false);
   const [placeInfo, setPlaceInfo] = useState({ ...currentPlaceInfo });
   const [isKakaoMapView, setIsKakaoMapView] = useState(true);
 
-  const { name, address, url, kakaoId, naverId, isNewPlace } = placeInfo;
+  const { name, address, url, kakaoId, naverId, drink, food } = placeInfo;
 
   useEffect(() => {
     setPlaceInfo(currentPlaceInfo);
@@ -52,7 +63,28 @@ const PlaceInfo = ({ currentPlaceInfo }) => {
             <FontAwesomeIcon icon={isExpanded ? faChevronDown : faChevronUp} />
           </ExpandIcon>
         )}
-        {hasCheckedIn && <Logo src={LogoSupportLocal} alt="Support Local" />}
+        {hasCheckedIn && <Logo src={MacDuck} alt="Beer" />}
+
+        <Icons>
+          {drink === 'beer' && <FontAwesomeIcon icon={faBeer} size="2x" />}
+          {drink === 'soju' && (
+            <FontAwesomeIcon icon={faWineBottle} size="2x" />
+          )}
+          {drink === 'wine' && <FontAwesomeIcon icon={faWineGlass} size="2x" />}
+          {drink === 'shot' && <FontAwesomeIcon icon={faCocktail} size="2x" />}
+          {(drink === 'sake' || drink === 'makgeolli') && DRINK[drink]}
+
+          {food === 'pizza' && (
+            <FontAwesomeIcon icon={faPizzaSlice} size="2x" />
+          )}
+          {food === 'hamburger' && (
+            <FontAwesomeIcon icon={faHamburger} size="2x" />
+          )}
+          {food === 'japanese' && <FontAwesomeIcon icon={faFish} size="2x" />}
+
+          {(food === 'meat' || food === 'american' || food === 'chicken') &&
+            FOOD[food]}
+        </Icons>
 
         <InfoBody isExpanded={isExpanded}>
           <Row>

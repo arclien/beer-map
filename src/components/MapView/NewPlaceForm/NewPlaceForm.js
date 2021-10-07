@@ -82,7 +82,7 @@ const NewPlaceForm = ({ placeInfo, formData, handleFormData }) => {
             'chicken',
             'meat',
             'fries',
-            'fingerfood',
+            'american',
             'etc',
           ]}
         />
