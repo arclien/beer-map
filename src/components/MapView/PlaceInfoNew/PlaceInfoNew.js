@@ -10,7 +10,7 @@ import { browserOpen } from 'utils/utils';
 import useMobileDetect from 'hooks/useMobileDetect';
 import NewPlaceForm from '../NewPlaceForm/NewPlaceForm';
 import { errorToast, customToast } from 'utils/toast';
-import { addPlace, getPlaceExist, getPlaceInfoById } from 'services/place';
+import { getTodayDate } from 'utils/day';
 
 import {
   Container,
@@ -26,6 +26,10 @@ const DefaultValue = {
   score: 10,
   drink: 'beer',
   food: 'pizza',
+  category: 'american',
+  timestamp: getTodayDate('YY-MM-DD'),
+  parking: '',
+  service: '',
   user: '',
 };
 

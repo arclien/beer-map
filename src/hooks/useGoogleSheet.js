@@ -31,7 +31,6 @@ export default function useGoogleSheet() {
     const addedRows = [
       {
         ...placeInfo,
-        id: 'TODO',
       },
     ];
     if (CACHE?.googleSheet?.sheet && addedRows.length > 0) {
@@ -65,7 +64,6 @@ export default function useGoogleSheet() {
           address,
           drink,
           food,
-          id,
           kakaoId,
           latitude,
           longitude,
@@ -78,7 +76,6 @@ export default function useGoogleSheet() {
             address,
             drink,
             food,
-            id,
             kakaoId,
             latitude,
             longitude,

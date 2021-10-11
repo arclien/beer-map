@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DRINK, FOOD } from 'utils/Text.utils';
+import { DRINK, FOOD, CATEGORY, SERVICE } from 'utils/Text.utils';
 
 import {
   Container,
@@ -18,7 +18,7 @@ const RadioButton = ({
   value,
   formKey,
   onClickRadio,
-  radionOptions,
+  radioOptions = null,
 }) => {
   return (
     <Container>
@@ -27,17 +27,15 @@ const RadioButton = ({
         {required && <Required>*</Required>}
       </RowTop>
       <Row>
-        {radionOptions &&
-          radionOptions.map((option) => {
+        {radioOptions &&
+          Object.entries(radioOptions).map((option) => {
             return (
               <RadioBox
-                key={option}
-                isChecked={value === option}
-                onClick={() => onClickRadio(formKey, option)}
+                key={option[0]}
+                isChecked={value === option[0]}
+                onClick={() => onClickRadio(formKey, option[0])}
               >
-                <Text>
-                  {formKey === 'drink' ? DRINK[option] : FOOD[option]}
-                </Text>
+                <Text>{option[1]}</Text>
               </RadioBox>
             );
           })}

@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 
-import { SCORE } from 'utils/Text.utils';
+import {
+  SCORE,
+  DRINK,
+  FOOD,
+  CATEGORY,
+  SERVICE,
+  PARKING,
+} from 'utils/Text.utils';
 import { USER_EMAIL } from 'constants/user';
 import { Storage } from 'services/storage';
 import RadioButton from './RadioButton/RadioButton';
 
-import {
-  Container,
-  Row,
-  Input,
-  InputHalf,
-  SelectBox,
-  SelectBoxHalf,
-} from './NewPlaceForm.styles';
+import { Container, Row, Input, SelectBox } from './NewPlaceForm.styles';
 
 const NewPlaceForm = ({ placeInfo, formData, handleFormData }) => {
   const { name, latitude, longitude, kakaoId, address, phone, isNewPlace } =
@@ -66,7 +66,17 @@ const NewPlaceForm = ({ placeInfo, formData, handleFormData }) => {
           value={formData.drink}
           formKey="drink"
           onClickRadio={handleFormData}
-          radionOptions={['beer', 'soju', 'makgeolli', 'sake', 'wine', 'etc']}
+          radioOptions={DRINK}
+        />
+      </Row>
+      <Row>
+        <RadioButton
+          title="카테고리"
+          required
+          value={formData.category}
+          formKey="category"
+          onClickRadio={handleFormData}
+          radioOptions={CATEGORY}
         />
       </Row>
       <Row>
@@ -76,15 +86,27 @@ const NewPlaceForm = ({ placeInfo, formData, handleFormData }) => {
           value={formData.food}
           formKey="food"
           onClickRadio={handleFormData}
-          radionOptions={[
-            'pizza',
-            'hamburger',
-            'chicken',
-            'meat',
-            'fries',
-            'american',
-            'etc',
-          ]}
+          radioOptions={FOOD}
+        />
+      </Row>
+
+      <Row>
+        <RadioButton
+          title="서비스"
+          value={formData.service}
+          formKey="service"
+          onClickRadio={handleFormData}
+          radioOptions={SERVICE}
+        />
+      </Row>
+
+      <Row>
+        <RadioButton
+          title="주차"
+          value={formData.parking}
+          formKey="parking"
+          onClickRadio={handleFormData}
+          radioOptions={PARKING}
         />
       </Row>
 

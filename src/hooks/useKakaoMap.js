@@ -109,8 +109,8 @@ export default function useKakaoMap(container, markerData) {
     }
 
     // 카카오 API 검색 결과에 대해서만 setBounds를 한다
-    const isMapData = markerData.reduce((acc, { id, isNewPlace }) => {
-      return false || !!id || !isNewPlace;
+    const isMapData = markerData.reduce((acc, { isNewPlace }) => {
+      return false || !isNewPlace;
     }, true);
 
     // 카카오 API 검색 결과에 대해서만 setBounds를 한다
