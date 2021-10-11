@@ -11,6 +11,9 @@ export const CATEGORY = {
   japanese: '일식',
   chinese: '중식',
   korean: '한식',
+  pub: '펍',
+  bottleshop: '바틀샵',
+  brewery: '브루어리',
   etc: '그 외',
 };
 
