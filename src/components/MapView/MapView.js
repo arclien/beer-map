@@ -10,6 +10,7 @@ import useGoogleSheet from 'hooks/useGoogleSheet';
 import PlaceInfo from './PlaceInfo/PlaceInfo';
 import PlaceInfoNew from './PlaceInfoNew/PlaceInfoNew';
 import MapOption from './MapOption/MapOption';
+import MapFilter from './MapFilter/MapFilter';
 import SearchPlace from './SearchPlace/SearchPlace';
 import { ConfirmModalContext } from 'context/ConfirmModalContext';
 import { errorToast } from 'utils/toast';
@@ -173,6 +174,7 @@ const MapView = () => {
   return (
     <>
       <KakaoMap id="container" ref={container} />
+      <MapFilter setMarkerData={setMarkerData} />
       <MapOption
         map={kakaoMap}
         myGeoLocation={myGeoLocation}

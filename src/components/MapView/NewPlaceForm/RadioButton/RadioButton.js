@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { DRINK, FOOD, CATEGORY, SERVICE } from 'utils/Text.utils';
-
 import {
   Container,
   Row,

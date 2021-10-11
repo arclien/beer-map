@@ -14,7 +14,12 @@ export const Icons = styled.div`
   ${flexContainer('flex-start', '', 'column')};
 
   background-color: #f5f5f5;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 `;
+
 export const Icon = styled.div`
   ${flexContainer('center', 'center')};
 
