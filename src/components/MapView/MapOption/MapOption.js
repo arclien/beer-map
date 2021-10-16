@@ -24,7 +24,7 @@ const MapOption = ({
   const relocateCurrentPosition = () => {
     setAbleToSearch(false);
     getGeoLocation();
-    setMarkerData([]);
+    setMarkerData(sheetMapData);
     const { lat, lng } = myGeoLocation;
     const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
     map.panTo(moveLatLon);
@@ -33,11 +33,6 @@ const MapOption = ({
   // 현재 지도 중심으로 다시 검색
   const reloadMarkerOnCurrentPosition = async () => {
     setAbleToSearch(false);
-
-    // 지도의 중심좌표를 얻어옵니다
-    const { Ma, La } = map.getCenter();
-
-    relocateCurrentPosition();
     setMarkerData(sheetMapData);
   };
 
