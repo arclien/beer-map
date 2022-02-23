@@ -22,6 +22,7 @@ const MapView = () => {
   const [checkInPlaceId, setCheckInPlaecId] = useState();
   // 검색 여부
   const [isAbleToSearch, setAbleToSearch] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const { getGoogleSheetMapData } = useGoogleSheet();
 
   const {
@@ -47,6 +48,10 @@ const MapView = () => {
       setMarkerData(mapData);
     })();
   }, [getGoogleSheetMapData]);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, [markerData]);
 
   // QR로 체크인 접속시
   useEffect(() => {
@@ -97,20 +102,24 @@ const MapView = () => {
   return (
     <>
       <KakaoMap id="container" ref={container} />
-      <MapFilter setMarkerData={setMarkerData} />
-      <MapOption
-        map={kakaoMap}
-        myGeoLocation={myGeoLocation}
-        getGeoLocation={getGeoLocation}
-        setAbleToSearch={setAbleToSearch}
-        setMarkerData={setMarkerData}
-      />
-      <SearchPlace
-        setMarkerData={setMarkerData}
-        kakaoMap={kakaoMap}
-        isAbleToSearch={isAbleToSearch}
-        setAbleToSearch={setAbleToSearch}
-      />
+      {isLoaded && (
+        <>
+          <MapFilter setMarkerData={setMarkerData} />
+          <MapOption
+            map={kakaoMap}
+            myGeoLocation={myGeoLocation}
+            getGeoLocation={getGeoLocation}
+            setAbleToSearch={setAbleToSearch}
+            setMarkerData={setMarkerData}
+          />
+          <SearchPlace
+            setMarkerData={setMarkerData}
+            kakaoMap={kakaoMap}
+            isAbleToSearch={isAbleToSearch}
+            setAbleToSearch={setAbleToSearch}
+          />
+        </>
+      )}
 
       {(isVisiblePlaceInfo || checkInPlaceId) &&
         !isEmptyObject(currentPlaceInfo) &&
@@ -122,7 +131,7 @@ const MapView = () => {
         <PlaceInfoNew currentPlaceInfo={currentPlaceInfo} />
       )}
 
-      {!kakaoMap&&(
+      {(!kakaoMap || !isLoaded) && (
         <SpinnerContainer>
           <SpinnerComponent />
         </SpinnerContainer>

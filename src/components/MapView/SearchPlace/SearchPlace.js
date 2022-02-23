@@ -15,9 +15,18 @@ const SearchPlace = ({
 }) => {
   const [keywordSearch, setKeywordSearch] = useState('');
   const [searchKakao, setSearchKakao] = useState(false);
+  const [sheetMapData, setSheetMapData] = useState([]);
   const debounceSearchKeyword = useDebounce(keywordSearch, 500);
-  const { sheetMapData } = useGoogleSheet();
+  const { getGoogleSheetMapData } = useGoogleSheet();
 
+ 
+  useEffect(() => {
+    (async () => {
+      const mapData = await getGoogleSheetMapData();
+      setSheetMapData(mapData);
+    })();
+  }, [getGoogleSheetMapData]);
+  
   const getSimilarExistPlace = useCallback(
     (placeName) =>
       sheetMapData

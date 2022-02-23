@@ -14,6 +14,8 @@ export const CATEGORY = {
   pub: '펍',
   bottleshop: '바틀샵',
   brewery: '브루어리',
+  bakery: '베이커리',
+  dessert: '디저트',
   etc: '그 외',
 };
 
@@ -24,6 +26,7 @@ export const DRINK = {
   wine: '와인',
   makgeolli: '막걸리',
   shot: '샷',
+  coffee: '커피',
   etc: '그 외',
 };
 
@@ -38,6 +41,8 @@ export const FOOD = {
   rawfish: '회',
   jeon: '전류',
   appetizer: '안주',
+  bread: '빵',
+  soup: '국물/탕',
 };
 
 export const SERVICE = {
@@ -55,3 +60,12 @@ export const PARKING = {
   valet: '발렛',
   no: '불가',
 };
+
+export const PLACE = {
+  seoul: '서울',
+  gyeonggi: '경기도',
+  incheon: '인천',
+  busan: '부산',
+  jeju: '제주',
+  kangwon: '강원도',
+}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
 import { getTodayDate } from 'utils/day';
@@ -11,7 +11,6 @@ import {
 
 const CACHE = {
   mapData: null,
-  aaa: false, // 잦은 호출 방지용.
   googleSheet: {
     doc: new GoogleSpreadsheet(SHEET_DOC_ID),
     sheet: null,
@@ -62,13 +61,7 @@ export default function useGoogleSheet() {
   );
 
   const getGoogleSheetMapData = useCallback(async () => {
-    if (!CACHE?.aaa) {
-      CACHE.aaa = true;
-    } else {
-      return;
-    }
-
-    if (CACHE?.mapData && CACHE?.googleSheet.sheet) return;
+    if (CACHE?.mapData && CACHE?.googleSheet.sheet) return CACHE?.mapData;
 
     const { doc } = CACHE?.googleSheet;
     await doc.useServiceAccountAuth({
@@ -95,6 +88,7 @@ export default function useGoogleSheet() {
         category,
         service,
         parking,
+        place,
         user,
         timestamp,
         kakaoId,
@@ -112,6 +106,7 @@ export default function useGoogleSheet() {
           category,
           service,
           parking,
+          place,
           user,
           timestamp,
           kakaoId,

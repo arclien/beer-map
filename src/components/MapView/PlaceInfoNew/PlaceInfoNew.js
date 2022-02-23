@@ -30,6 +30,7 @@ const DefaultValue = {
   timestamp: getTodayDate('YY-MM-DD'),
   parking: '',
   service: '',
+  place: '',
   user: '',
 };
 

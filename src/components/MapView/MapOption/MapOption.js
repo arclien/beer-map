@@ -18,13 +18,14 @@ const MapOption = ({
   setAbleToSearch,
   setMarkerData,
 }) => {
-  const { sheetMapData } = useGoogleSheet();
+  const { getGoogleSheetMapData } = useGoogleSheet();
 
   // 현재 위치로 맵 이동
-  const relocateCurrentPosition = () => {
+  const relocateCurrentPosition = async () => {
     setAbleToSearch(false);
     getGeoLocation();
-    setMarkerData(sheetMapData);
+    const mapData = await getGoogleSheetMapData();
+    setMarkerData(mapData);
     const { lat, lng } = myGeoLocation;
     const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
     map.panTo(moveLatLon);
@@ -33,7 +34,8 @@ const MapOption = ({
   // 현재 지도 중심으로 다시 검색
   const reloadMarkerOnCurrentPosition = async () => {
     setAbleToSearch(false);
-    setMarkerData(sheetMapData);
+    const mapData = await getGoogleSheetMapData();
+    setMarkerData(mapData);
   };
 
   // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다

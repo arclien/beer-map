@@ -7,6 +7,7 @@ import {
   CATEGORY,
   SERVICE,
   PARKING,
+  PLACE,
 } from 'utils/Text.utils';
 import { USER_EMAIL } from 'constants/user';
 import { Storage } from 'services/storage';
@@ -107,6 +108,16 @@ const NewPlaceForm = ({ placeInfo, formData, handleFormData }) => {
           formKey="parking"
           onClickRadio={handleFormData}
           radioOptions={PARKING}
+        />
+      </Row>
+
+      <Row>
+        <RadioButton
+          title="지역"
+          value={formData.place}
+          formKey="place"
+          onClickRadio={handleFormData}
+          radioOptions={PLACE}
         />
       </Row>
 

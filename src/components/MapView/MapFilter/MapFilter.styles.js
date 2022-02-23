@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { flexContainer, font, BasePopover, PopoverItem } from 'remember-ui';
 
 export const Container = styled.div`
-  width: 123px;
+  width: 163px;
   height: 41px;
   position: absolute;
   top: 16px;
@@ -39,6 +39,11 @@ Filters.Option.Drink = styled(Filters.Option)`
 `;
 
 Filters.Option.Food = styled(Filters.Option)`
+  border-left: solid 2px #000000;
+  border-right: solid 2px #000000;
+`;
+
+Filters.Option.Place = styled(Filters.Option)`
   border-left: solid 2px #000000;
   border-right: solid 2px #000000;
 `;
