@@ -40,7 +40,7 @@ const PlaceInfoNew = ({ currentPlaceInfo, setCurrentPlaceInfo }) => {
   const [isAddNewPlaceModalOpen, setIsAddNewPlaceModalOpen] = useState(false);
   const [formData, setFormData] = useState({ ...DefaultValue });
 
-  const { addNewMapDataToSheet } = useGoogleSheet();
+  const { checkExistPlace, addNewMapDataToSheet } = useGoogleSheet();
   const isMobile = useMobileDetect();
 
   const handleFormData = (name, value) => {
@@ -122,14 +122,13 @@ const PlaceInfoNew = ({ currentPlaceInfo, setCurrentPlaceInfo }) => {
 
       <AddPlaceButton
         onClick={async () => {
-          // const { id, status } = await getPlaceExist({ kakaoId });
-          // if (status) {
-          //   customToast(`${name}은 이미 추가 되어있습니다!`);
-          //   const data = await getPlaceInfoById(id);
-          //   setCurrentPlaceInfo(data);
-          // } else {
-          //   setIsAddNewPlaceModalOpen(true);
-          // }
+          const existPlace = checkExistPlace();
+          if (existPlace) {
+            customToast(`${name}은 이미 추가 되어있습니다!`);
+            setCurrentPlaceInfo(existPlace);
+          } else {
+            setIsAddNewPlaceModalOpen(true);
+          }
           setIsAddNewPlaceModalOpen(true);
         }}
       >

@@ -25,7 +25,7 @@ export default function useKakaoMap(container, markerData) {
   // 맵 초기화
   const initMap = useCallback(() => {
     const { lat, lng } = myGeoLocation;
-
+  
     if (!lat || !lng) return;
     // 지도를 생성할 때 필요한 기본 옵션
     const options = {
@@ -117,7 +117,6 @@ export default function useKakaoMap(container, markerData) {
       ({ latitude, longitude }) =>
         new window.kakao.maps.LatLng(latitude, longitude)
     );
-
     setMarkers((markers) => {
       // clear prev markers
       markers.forEach((marker) => marker.setMap(null));

@@ -1,22 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
-import {
-  GoogleSpreadsheet,
-  GoogleSpreadsheetWorksheet,
-  GoogleSpreadsheetRow,
-} from 'google-spreadsheet';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
 
-import { errorToast, customToast } from 'utils/toast';
-import MapData from 'constants/mapData';
+import { getTodayDate } from 'utils/day';
 import {
   SHEET_DOC_ID,
   SHEET_ID,
-  SHEET_COLUMN_KEY,
   GOOGLE_SERVICE_CLIENT_EMAIL,
   GOOGLE_SERVICE_PRIVATE_KEY,
 } from '../constants/googlesheet';
 
 const CACHE = {
   mapData: null,
+  aaa: false, // 잦은 호출 방지용.
   googleSheet: {
     doc: new GoogleSpreadsheet(SHEET_DOC_ID),
     sheet: null,
@@ -39,28 +34,78 @@ export default function useGoogleSheet() {
     return false;
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      if (CACHE?.mapData && CACHE?.googleSheet.sheet) return;
-
+  const addCheckInDataToSheet = useCallback(
+    async (userEmail, { name, kakaoId }, { drink, food, tag, user, note }) => {
       const { doc } = CACHE?.googleSheet;
-      await doc.useServiceAccountAuth({
-        client_email: GOOGLE_SERVICE_CLIENT_EMAIL || '',
-        private_key: GOOGLE_SERVICE_PRIVATE_KEY || '',
-      });
+      let sheet = doc.sheetsByTitle[userEmail]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+      if (!sheet) {
+        sheet = await doc.addSheet({ title: userEmail });
+      }
+      const addedRows = [
+        {
+          name,
+          kakaoId,
+          timestamp: getTodayDate('YY-MM-DD'),
+          drink,
+          food,
+          tag,
+          user,
+          note,
+        },
+      ];
+      if (sheet && addedRows.length > 0) {
+        return sheet.addRows(addedRows);
+      }
+      return false;
+    },
+    []
+  );
 
-      await doc.loadInfo(); // loads document properties and worksheets
-      const sheetObj = doc.sheetsById[SHEET_ID];
-      if (!sheetObj) return;
-      const rowsObj = await sheetObj.getRows();
-      CACHE.googleSheet = {
-        ...CACHE?.googleSheet,
-        sheet: sheetObj,
-        rows: rowsObj,
-      };
+  const getGoogleSheetMapData = useCallback(async () => {
+    if (!CACHE?.aaa) {
+      CACHE.aaa = true;
+    } else {
+      return;
+    }
 
-      const mapData = CACHE.googleSheet.rows.map(
-        ({
+    if (CACHE?.mapData && CACHE?.googleSheet.sheet) return;
+
+    const { doc } = CACHE?.googleSheet;
+    await doc.useServiceAccountAuth({
+      client_email: GOOGLE_SERVICE_CLIENT_EMAIL || '',
+      private_key: GOOGLE_SERVICE_PRIVATE_KEY || '',
+    });
+
+    await doc.loadInfo(); // loads document properties and worksheets
+    const sheetObj = doc.sheetsById[SHEET_ID];
+
+    if (!sheetObj) return;
+    const rowsObj = await sheetObj.getRows();
+    CACHE.googleSheet = {
+      ...CACHE?.googleSheet,
+      sheet: sheetObj,
+      rows: rowsObj,
+    };
+
+    const mapData = CACHE.googleSheet.rows.map(
+      ({
+        address,
+        drink,
+        food,
+        category,
+        service,
+        parking,
+        user,
+        timestamp,
+        kakaoId,
+        latitude,
+        longitude,
+        name,
+        naverId,
+        phone,
+        url,
+      }) => {
+        return {
           address,
           drink,
           food,
@@ -76,34 +121,24 @@ export default function useGoogleSheet() {
           naverId,
           phone,
           url,
-        }) => {
-          return {
-            address,
-            drink,
-            food,
-            category,
-            service,
-            parking,
-            user,
-            timestamp,
-            kakaoId,
-            latitude,
-            longitude,
-            name,
-            naverId,
-            phone,
-            url,
-          };
-        }
-      );
+        };
+      }
+    );
 
-      CACHE.mapData = mapData;
-      setSheetMapData(mapData);
-    })();
-  }, [sheetMapData]);
+    CACHE.mapData = mapData;
+    setSheetMapData(mapData);
+
+    return mapData;
+  },[]);
+
+  const checkExistPlace = (kakaoId) =>
+    CACHE.mapData.find((mapData) => mapData.kakaoId === kakaoId);
 
   return {
     sheetMapData,
+    getGoogleSheetMapData,
     addNewMapDataToSheet,
+    addCheckInDataToSheet,
+    checkExistPlace,
   };
 }

@@ -14,6 +14,7 @@ const SearchPlace = ({
   kakaoMap,
 }) => {
   const [keywordSearch, setKeywordSearch] = useState('');
+  const [searchKakao, setSearchKakao] = useState(false);
   const debounceSearchKeyword = useDebounce(keywordSearch, 500);
   const { sheetMapData } = useGoogleSheet();
 
@@ -34,6 +35,7 @@ const SearchPlace = ({
   useEffect(() => {
     if (!isAbleToSearch) {
       setKeywordSearch('');
+      setSearchKakao(false);
       setMarkerData([]);
     }
   }, [isAbleToSearch, setMarkerData]);
@@ -56,10 +58,12 @@ const SearchPlace = ({
       return;
     }
 
-    const existPlace = getSimilarExistPlace(debounceSearchKeyword);
-    if (existPlace.length > 0) {
-      setMarkerData(existPlace);
-      return;
+    if (!searchKakao) {
+      const existPlace = getSimilarExistPlace(debounceSearchKeyword);
+      if (existPlace.length > 0) {
+        setMarkerData(existPlace);
+        return;
+      }
     }
 
     // 장소 검색 객체를 생성합니다
@@ -104,7 +108,13 @@ const SearchPlace = ({
       },
       options
     );
-  }, [debounceSearchKeyword, getSimilarExistPlace, kakaoMap, setMarkerData]);
+  }, [
+    debounceSearchKeyword,
+    getSimilarExistPlace,
+    kakaoMap,
+    searchKakao,
+    setMarkerData,
+  ]);
 
   return (
     <>
@@ -119,6 +129,7 @@ const SearchPlace = ({
           keywordSearch={keywordSearch}
           setKeywordSearch={setKeywordSearch}
           setAbleToSearch={setAbleToSearch}
+          setSearchKakao={setSearchKakao}
         />
       )}
     </>

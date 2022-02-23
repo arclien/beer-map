@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import {
-  faChevronUp,
-  faChevronDown,
-  faBeer,
-  faWineBottle,
-  faWineGlass,
-  faCocktail,
-  faPizzaSlice,
-  faHamburger,
-  faFish,
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { USER_EMAIL } from 'constants/user';
+import { Storage } from 'services/storage';
 import { hasCheckedInById } from 'utils/CheckedIn.utils';
 import PlaceKakaoView from '../PlaceKakaoView/PlaceKakaoView';
 import PlaceNaverView from '../PlaceNaverView/PlaceNaverView';
 import { errorToast } from 'utils/toast';
 import { browserOpen } from 'utils/utils';
-import { FOOD, DRINK } from 'utils/Text.utils';
+import useGoogleSheet from 'hooks/useGoogleSheet';
 
 import {
   Container,
@@ -29,7 +21,7 @@ import {
   Header,
   ExpandIcon,
   Logo,
-  Icons,
+  CheckIn,
 } from './PlaceInfo.styles';
 
 import MacDuck from 'assets/images/macduck.png';
@@ -38,15 +30,20 @@ const PlaceInfo = ({ currentPlaceInfo }) => {
   const [isExpanded, setExpanded] = useState(false);
   const [placeInfo, setPlaceInfo] = useState({ ...currentPlaceInfo });
   const [isKakaoMapView, setIsKakaoMapView] = useState(true);
+  const { addCheckInDataToSheet } = useGoogleSheet();
 
-  const { name, address, url, kakaoId, naverId, drink, food } = placeInfo;
+  const { name, address, url, kakaoId, naverId } = placeInfo;
 
   useEffect(() => {
     setPlaceInfo(currentPlaceInfo);
   }, [currentPlaceInfo]);
 
   const hasCheckedIn = hasCheckedInById(kakaoId);
-
+  const checkIn = () => {
+    const email = Storage.getItem(USER_EMAIL);
+    const checkInData = { drink: '', food: '', tag: '', user: '', note: '' };
+    addCheckInDataToSheet(email, placeInfo, checkInData);
+  };
   return (
     <Container isExpanded={isExpanded}>
       <Info>
@@ -64,27 +61,7 @@ const PlaceInfo = ({ currentPlaceInfo }) => {
           </ExpandIcon>
         )}
         {hasCheckedIn && <Logo src={MacDuck} alt="Beer" />}
-
-        <Icons>
-          {drink === 'beer' && <FontAwesomeIcon icon={faBeer} size="2x" />}
-          {drink === 'soju' && (
-            <FontAwesomeIcon icon={faWineBottle} size="2x" />
-          )}
-          {drink === 'wine' && <FontAwesomeIcon icon={faWineGlass} size="2x" />}
-          {drink === 'shot' && <FontAwesomeIcon icon={faCocktail} size="2x" />}
-          {(drink === 'sake' || drink === 'makgeolli') && DRINK[drink]}
-
-          {food === 'pizza' && (
-            <FontAwesomeIcon icon={faPizzaSlice} size="2x" />
-          )}
-          {food === 'hamburger' && (
-            <FontAwesomeIcon icon={faHamburger} size="2x" />
-          )}
-          {food === 'japanese' && <FontAwesomeIcon icon={faFish} size="2x" />}
-
-          {(food === 'meat' || food === 'american' || food === 'chicken') &&
-            FOOD[food]}
-        </Icons>
+        {!hasCheckedIn && <CheckIn onClick={() => checkIn()}>체크인</CheckIn>}
 
         <InfoBody isExpanded={isExpanded}>
           <Row>

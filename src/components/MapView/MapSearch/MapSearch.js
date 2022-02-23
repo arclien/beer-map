@@ -7,7 +7,12 @@ import {
   SearchButton,
 } from './MapSearch.styles';
 
-const MapSearch = ({ keywordSearch, setKeywordSearch, setAbleToSearch }) => {
+const MapSearch = ({
+  keywordSearch,
+  setKeywordSearch,
+  setAbleToSearch,
+  setSearchKakao,
+}) => {
   const [searchInput, setSearchInput] = useState('');
 
   return (
@@ -28,6 +33,7 @@ const MapSearch = ({ keywordSearch, setKeywordSearch, setAbleToSearch }) => {
             <SearchButton
               onClick={() => {
                 setAbleToSearch(false);
+                setSearchKakao(false);
                 setSearchInput('');
                 setKeywordSearch('');
               }}
@@ -40,15 +46,25 @@ const MapSearch = ({ keywordSearch, setKeywordSearch, setAbleToSearch }) => {
           </>
         )}
         {keywordSearch && (
-          <SearchButton
-            full
-            onClick={() => {
-              setSearchInput('');
-              setKeywordSearch('');
-            }}
-          >
-            다시 검색
-          </SearchButton>
+          <>
+            <SearchButton
+              onClick={() => {
+                setSearchInput('');
+                setKeywordSearch('');
+                setSearchKakao(false);
+              }}
+            >
+              다시 검색
+            </SearchButton>
+            <SearchButton
+              onClick={() => {
+                setSearchKakao(true);
+                setKeywordSearch(searchInput);
+              }}
+            >
+              카카오맵 검색
+            </SearchButton>
+          </>
         )}
       </Buttons>
     </Container>

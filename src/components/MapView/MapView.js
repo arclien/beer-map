@@ -22,6 +22,14 @@ const MapView = () => {
   const [checkInPlaceId, setCheckInPlaecId] = useState();
   // 검색 여부
   const [isAbleToSearch, setAbleToSearch] = useState(false);
+  const { getGoogleSheetMapData } = useGoogleSheet();
+
+  const {
+    state: { isOpenConfirmModal },
+    actions: { openOkConfirmModal, closeConfirmModal },
+  } = useContext(ConfirmModalContext);
+
+  const { search } = useLocation();
 
   const {
     kakaoMap,
@@ -32,23 +40,13 @@ const MapView = () => {
     getGeoLocation,
   } = useKakaoMap(container, markerData);
 
-  const { sheetMapData } = useGoogleSheet();
-
-  const {
-    state: { isOpenConfirmModal },
-    actions: { openOkConfirmModal, closeConfirmModal },
-  } = useContext(ConfirmModalContext);
-
-  const { search } = useLocation();
-
   // 맵에 마커 등록
   useEffect(() => {
     (async () => {
-      if (!kakaoMap) return;
-
-      setMarkerData(sheetMapData);
+      const mapData = await getGoogleSheetMapData();
+      setMarkerData(mapData);
     })();
-  }, [kakaoMap, sheetMapData]);
+  }, [getGoogleSheetMapData]);
 
   // QR로 체크인 접속시
   useEffect(() => {
@@ -58,7 +56,7 @@ const MapView = () => {
       ignoreQueryPrefix: true,
     });
 
-    const _currentPlaceInfo = markerData.find(
+    const _currentPlaceInfo = markerData?.find(
       (el) => el.kakaoId === parseInt(id, 10)
     );
 
@@ -124,7 +122,7 @@ const MapView = () => {
         <PlaceInfoNew currentPlaceInfo={currentPlaceInfo} />
       )}
 
-      {!kakaoMap && (
+      {!kakaoMap&&(
         <SpinnerContainer>
           <SpinnerComponent />
         </SpinnerContainer>

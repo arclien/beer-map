@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gray400, flexContainer, font, text } from 'remember-ui';
+import { white, gray400, flexContainer, font, text } from 'remember-ui';
 
 export const Container = styled.div`
   ${flexContainer('flex-start', 'flex-start', 'column')};
@@ -96,7 +96,26 @@ export const Review = styled.div`
   ${font({ size: '16px', color: text })};
 `;
 
-export const CheckIn = styled.div``;
+export const CheckIn = styled.div`
+  width: 80px;
+  height: 44px;
+  position: absolute;
+  right: -10px;
+  top: -13px;
+  ${font({ size: '14px', weight: 'bold', color: white })};
+  text-align: center;
+  z-index: 100;
+
+  line-height: 1.86;
+  letter-spacing: -1.23px;
+
+  padding: 9px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.3), inset 4px 4px 0 0 #878787,
+    inset -4px -4px 0 0 #232323;
+  border: solid 2px #000000;
+  background-color: #383838;
+`;
 
 export const Logo = styled.img`
   width: 100px;
@@ -104,14 +123,4 @@ export const Logo = styled.img`
   position: absolute;
   right: -10px;
   top: -47px;
-`;
-
-export const Icons = styled.div`
-  z-index: 999;
-  width: 100px;
-  height: 34px;
-  position: absolute;
-  right: -11px;
-  top: -15px;
-  text-align: right;
 `;
